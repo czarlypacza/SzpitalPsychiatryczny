@@ -1,30 +1,36 @@
-insert into hospital_wards(ward_id, ward_name) values (1, 'Parker-Walter');
-insert into hospital_wards (ward_id, ward_name) values (2, 'Reynolds and Sons');
-insert into hospital_wards (ward_id, ward_name) values (3, 'Greenfelder and Sons');
-insert into hospital_wards (ward_id, ward_name) values (4, 'Watsica Inc');
-insert into hospital_wards (ward_id, ward_name) values (5, 'Luettgen Group');
-insert into hospital_wards (ward_id, ward_name) values (6, 'Ferry-Kshlerin');
-insert into hospital_wards (ward_id, ward_name) values (7, 'Hackett and Sons');
-insert into hospital_wards (ward_id, ward_name) values (8, 'Bernhard-Welch');
-insert into hospital_wards (ward_id, ward_name) values (9, 'Welch and Sons');
-insert into hospital_wards (ward_id, ward_name) values (10, 'Larson Group');
-insert into hospital_wards (ward_id, ward_name) values (11, 'Schuster-Hartmann');
-insert into hospital_wards (ward_id, ward_name) values (12, 'Flatley Inc');
-insert into hospital_wards (ward_id, ward_name) values (13, 'Bailey Inc');
-insert into hospital_wards (ward_id, ward_name) values (14, 'Nitzsche Group');
-insert into hospital_wards (ward_id, ward_name) values (15, 'Kutch-Weimann');
-insert into hospital_wards (ward_id, ward_name) values (16, 'Collins LLC');
-insert into hospital_wards (ward_id, ward_name) values (17, 'Jones, Larkin and Jacobs');
-insert into hospital_wards (ward_id, ward_name) values (18, 'Jacobi-Casper');
-insert into hospital_wards (ward_id, ward_name) values (19, 'Glover LLC');
-insert into hospital_wards (ward_id, ward_name) values (20, 'Hermann-Grant');
-insert into hospital_wards (ward_id, ward_name) values (21, 'Larkin-Boyle');
-insert into hospital_wards (ward_id, ward_name) values (22, 'Raynor Inc');
-insert into hospital_wards (ward_id, ward_name) values (23, 'Cormier and Sons');
-insert into hospital_wards (ward_id, ward_name) values (24, 'Hirthe-Mante');
-insert into hospital_wards (ward_id, ward_name) values (25, 'Streich LLC');
-insert into hospital_wards (ward_id, ward_name) values (26, 'Thiel, Kuhn and Greenfelder');
-insert into hospital_wards (ward_id, ward_name) values (27, 'Zboncak-Schimmel');
-insert into hospital_wards (ward_id, ward_name) values (28, 'Flatley-Armstrong');
-insert into hospital_wards (ward_id, ward_name) values (29, 'Reilly-Ankunding');
-insert into hospital_wards (ward_id, ward_name) values (30, 'Davis, Towne and Price');
+CREATE TABLE hospital_wards(
+	ward_id int IDENTITY(1,1) PRIMARY KEY,
+	ward_name varchar(50)
+)
+
+insert into hospital_wards(ward_name) values ('Parker-Walter');
+insert into hospital_wards (ward_name) values ('Reynolds and Sons');
+insert into hospital_wards (ward_name) values ('Greenfelder and Sons');
+insert into hospital_wards (ward_name) values ('Watsica Inc');
+insert into hospital_wards (ward_name) values ('Luettgen Group');
+insert into hospital_wards (ward_name) values ('Ferry-Kshlerin');
+insert into hospital_wards (ward_name) values ('Hackett and Sons');
+insert into hospital_wards (ward_name) values ('Bernhard-Welch');
+insert into hospital_wards (ward_name) values ('Welch and Sons');
+insert into hospital_wards (ward_name) values ( 'Larson Group');
+insert into hospital_wards (ward_name) values ( 'Schuster-Hartmann');
+insert into hospital_wards (ward_name) values ( 'Flatley Inc');
+insert into hospital_wards (ward_name) values ( 'Bailey Inc');
+insert into hospital_wards (ward_name) values ( 'Nitzsche Group');
+insert into hospital_wards (ward_name) values ( 'Kutch-Weimann');
+insert into hospital_wards (ward_name) values ( 'Collins LLC');
+insert into hospital_wards (ward_name) values ( 'Jones, Larkin and Jacobs');
+insert into hospital_wards (ward_name) values ( 'Jacobi-Casper');
+insert into hospital_wards (ward_name) values ( 'Glover LLC');
+insert into hospital_wards (ward_name) values ( 'Hermann-Grant');
+insert into hospital_wards (ward_name) values ( 'Larkin-Boyle');
+insert into hospital_wards (ward_name) values ( 'Raynor Inc');
+insert into hospital_wards (ward_name) values ( 'Cormier and Sons');
+insert into hospital_wards (ward_name) values ( 'Hirthe-Mante');
+insert into hospital_wards (ward_name) values ( 'Streich LLC');
+insert into hospital_wards (ward_name) values ( 'Thiel, Kuhn and Greenfelder');
+insert into hospital_wards (ward_name) values ( 'Zboncak-Schimmel');
+insert into hospital_wards (ward_name) values ( 'Flatley-Armstrong');
+insert into hospital_wards (ward_name) values ( 'Reilly-Ankunding');
+insert into hospital_wards (ward_name) values ( 'Davis, Towne and Price');
+
