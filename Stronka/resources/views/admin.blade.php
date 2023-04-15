@@ -609,34 +609,15 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($illnesses as $illness)
                 <tr>
 
-                    <td>Albuterol Sulfate</td>
-                    <td>Repair Appendix, Percutaneous Approach</td>
+                    <td>{{$illness->name}}</td>
+                    <td>{{$illness->description}}</td>
 
 
                 </tr>
-                <tr>
-
-                    <td>OCTINOXATE and TITANIUM DIOXIDE</td>
-                    <td>Removal of Other Device from Pelvic Cavity, Percutaneous Endoscopic Approach</td>
-
-
-                </tr>
-                <tr>
-
-                    <td>COLESTIPOL HYDROCHLORIDE</td>
-                    <td>Replacement of Abdomen Subcutaneous Tissue and Fascia with Synthetic Substitute, Percutaneous Approach</td>
-
-
-                </tr>
-                <tr>
-
-                    <td>Magnesium citrate</td>
-                    <td>Repair Left Sacroiliac Joint, External Approach</td>
-
-
-                </tr>
+                @endforeach
                 <tr>
                     <td colspan="5" class="text-center">
                         <button type="button" class="btn btn-primary ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalIllnesses">
