@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Szpital psychiatryczny</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
@@ -625,24 +626,28 @@
                         </button>
                         <div class="modal fade" id="ModalIllnesses" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Dodaj Chorobe</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="" class="row g-3">
-                                        <div class="col">
-                                            <input type="text" class="form-control mb-3" id="wardname" placeholder="Nazwa" aria-label="Nazwa">
-                                            <textarea class="form-control mb-3" rows="3" id="description" placeholder="Opis"></textarea>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Dodaj Chorobe</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form id="illnessForm" action="{{ url('/admin/storeIllness') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control mb-3" name="name" id="wardname" placeholder="Nazwa" aria-label="Nazwa">
+                                                <textarea class="form-control mb-3" rows="3" name="description" id="description" placeholder="Opis"></textarea>
+                                            </div>
+                                            @if (session('success'))
+                                                <p>{{ session('success') }}</p>
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" id="saveButton">Save changes</button>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
                             </div>
                         </div>
                     </td>
