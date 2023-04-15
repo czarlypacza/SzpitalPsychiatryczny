@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Illness;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class IllnessController extends Controller
 {
@@ -13,11 +14,9 @@ class IllnessController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        $illness = new Illness();
-        $illness->name = $request->input('name');
-        $illness->description = $request->input('description');
-        $illness->save();
-        return redirect('admin')->with('success', 'Illness added successfully');
+        DB::insert('exec addIllness ?, ?', [$request->input('name'), $request->input('description')]);
+
+        return redirect('admin');
     }
 
     public function destroy($id)

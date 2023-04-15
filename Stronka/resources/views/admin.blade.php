@@ -644,9 +644,7 @@
                                                 <input type="text" class="form-control mb-3" name="name" id="wardname" placeholder="Nazwa" aria-label="Nazwa">
                                                 <textarea class="form-control mb-3" rows="3" name="description" id="description" placeholder="Opis"></textarea>
                                             </div>
-                                            @if (session('success'))
-                                                <p>{{ session('success') }}</p>
-                                            @endif
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

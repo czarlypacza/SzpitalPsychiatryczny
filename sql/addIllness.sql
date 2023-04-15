@@ -1,4 +1,25 @@
-CREATE PROCEDURE addIllness 
-@name varchar(60), @description varchar(150)
-AS
-insert into illnesses (name, description) values (@name, @description);
+CREATE OR ALTER PROCEDURE ADDILLNESS @NAME VARCHAR(
+    60
+),
+@DESCRIPTION VARCHAR(
+    150
+) AS DECLARE @ILOSC INT;
+
+SET @ILOSC = (
+    SELECT
+        COUNT(ID)
+    FROM
+        ILLNESSES
+)
+
+IF (@ILOSC=0)
+
+BEGIN
+    INSERT INTO ILLNESSES (
+        NAME,
+        DESCRIPTION
+    ) VALUES (
+        @NAME,
+        @DESCRIPTION
+    );
+END
