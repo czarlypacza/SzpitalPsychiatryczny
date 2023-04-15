@@ -33,3 +33,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/admin/storeIllness',[IllnessController::class,'store']);
+
+//Route::delete('/illnesses/{id}', [IllnessController::class, 'destroy', 'id' => $id])->name('illnesses.destroy');
+
+Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');

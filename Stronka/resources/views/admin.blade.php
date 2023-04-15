@@ -607,17 +607,23 @@
                 <tr>
                     <th scope="col">Nazwa</th>
                     <th scope="col">Opis</th>
+                    <th scope="col">Akcja</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($illnesses as $illness)
                 <tr>
-
                     <td>{{$illness->name}}</td>
                     <td>{{$illness->description}}</td>
-
-
+                    <td>
+                        <form action="{{ route('illnesses.destroy', ['id' => $illness->id]) }}" method="POST" id="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć wpis?')">Usuń</button>
+                        </form>
+                    </td>
                 </tr>
+
                 @endforeach
                 <tr>
                     <td colspan="5" class="text-center">

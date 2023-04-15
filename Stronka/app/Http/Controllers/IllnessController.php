@@ -19,4 +19,12 @@ class IllnessController extends Controller
         $illness->save();
         return redirect('admin')->with('success', 'Illness added successfully');
     }
+
+    public function destroy($id)
+    {
+        Illness::destroy($id);
+        return redirect('admin');
+    }
+
+
 }
