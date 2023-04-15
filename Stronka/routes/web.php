@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\IllnessController;
+use App\Http\Controllers\WardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,5 @@ Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 Route::post('/admin/updateIllness',[IllnessController::class,'update']);
 
 Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');
+
+Route::post('/admin/storeWard',[WardController::class,'store']);

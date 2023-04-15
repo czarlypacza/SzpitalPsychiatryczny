@@ -32,14 +32,16 @@
     <div class="container mb-3">
         <h2>Zapisani pacjenci</h2>
     <div class="accordion accordion-flush" id="accordionFlushExample">
+
+
+       @foreach ($wards as $ward)
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-              Oddział elegancki
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$ward->id}}" aria-expanded="false" aria-controls="flush-collapse{{$ward->id}}">
+              {{$ward->ward_name}}
             </button>
           </h2>
-
-          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div id="flush-collapse{{$ward->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
                 <div class="container">
                     <div class="row">
@@ -330,157 +332,12 @@
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-              Oddział tych nijakich
-            </button>
-          </h2>
-          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <form action="" method="get">
-                                <div class="input-group mb-3">
-                                    <input name="filter" type="text" class="form-control" aria-label="email" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtruj</button>
-                                </div>
-                            </form>
-                            <table class="table-striped table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Imie i Nazwisko</th>
-                                        <th scope="col">Wiek</th>
-                                        <th scope="col">Tel.</th>
-                                        <th scope="col">Pesel</th>
-                                        <th scope="col">Przypisany doktor</th>
-                                        <th scope="col">Adres</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Kirk Wornum</td>
-                                        <td>63</td>
-                                        <td>791-622-6642</td>
-                                        <td>86097259953</td>
-                                        <td>Bev barham</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Bradly Rosenbush</td>
-                                        <td>50</td>
-                                        <td>920-420-6987</td>
-                                        <td>83174770222</td>
-                                        <td>Joanna Cotta</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>John Marnane</td>
-                                        <td>70</td>
-                                        <td>591-739-4369</td>
-                                        <td>84318991349</td>
-                                        <td>Tripp Enevold</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>Jerad Scrivin</td>
-                                        <td>48</td>
-                                        <td>868-865-2817</td>
-                                        <td>83787268570</td>
-                                        <td>Alla Hooper</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              Oddział Marcina
-            </button>
-          </h2>
-          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <form action="" method="get">
-                                <div class="input-group mb-3">
-                                    <input name="filter" type="text" class="form-control" aria-label="email" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtruj</button>
-                                </div>
-                            </form>
-                            <table class="table-striped table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Imie i Nazwisko</th>
-                                        <th scope="col">Wiek</th>
-                                        <th scope="col">Tel.</th>
-                                        <th scope="col">Pesel</th>
-                                        <th scope="col">Przypisany doktor</th>
-                                        <th scope="col">Adres</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Kirk Wornum</td>
-                                        <td>63</td>
-                                        <td>791-622-6642</td>
-                                        <td>86097259953</td>
-                                        <td>Bev barham</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Bradly Rosenbush</td>
-                                        <td>50</td>
-                                        <td>920-420-6987</td>
-                                        <td>83174770222</td>
-                                        <td>Joanna Cotta</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>John Marnane</td>
-                                        <td>70</td>
-                                        <td>591-739-4369</td>
-                                        <td>84318991349</td>
-                                        <td>Tripp Enevold</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>Jerad Scrivin</td>
-                                        <td>48</td>
-                                        <td>868-865-2817</td>
-                                        <td>83787268570</td>
-                                        <td>Alla Hooper</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
-    <div class="container mb-4">
+        @endforeach
+
+
+
+
+    <div class="container mb-4 mt-2">
         <div class="row justify-content-center">
             <div class="col-4 text-center">
                 <button type="button" class="btn btn-primary ms-3 me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -494,15 +351,18 @@
                           <h5 class="modal-title" id="exampleModalLabel">Dodaj oddział</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" id="wardname" placeholder="nazwa oddziału">
+                        <form id="WardForm" action="{{ url('/admin/storeWard') }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" name="ward_name" id="ward_name" placeholder="nazwa oddziału">
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="saveButton">Save changes</button>
+                            </div>
+                        </form>
                       </div>
                     </div>
                 </div>
@@ -643,7 +503,7 @@
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <input type="text" class="form-control mb-3" name="name" id="wardname" placeholder="Nazwa" aria-label="Nazwa">
+                                                <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Nazwa" aria-label="Nazwa">
                                                 <textarea class="form-control mb-3" rows="3" name="description" id="description" placeholder="Opis"></textarea>
                                             </div>
 
