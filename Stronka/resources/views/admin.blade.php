@@ -76,10 +76,10 @@
                                         <td>Bev barham</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient1">
+                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient1{{$ward->id}}">
                                                 Info
                                             </button>
-                                            <div class="modal fade" id="ModalPatient1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="ModalPatient1{{$ward->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -98,7 +98,9 @@
                                                                     <form action="" class="row g-3">
                                                                         <select class="form-select" aria-label="Choroba">
                                                                             <option selected>Choroba</option>
-
+                                                                            @foreach($illnesses as $ill)
+                                                                                <option>{{$ill->name}}</option>
+                                                                            @endforeach
                                                                           </select>
                                                                     </form>
                                                                 </li>
@@ -126,10 +128,10 @@
                                         <td>Joanna Cotta</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient2">
+                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient2{{$ward->id}}">
                                                 Info
                                             </button>
-                                            <div class="modal fade" id="ModalPatient2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="ModalPatient2{{$ward->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -148,7 +150,9 @@
                                                                     <form action="" class="row g-3">
                                                                         <select class="form-select" aria-label="Choroba">
                                                                             <option selected>Choroba</option>
-
+                                                                            @foreach($illnesses as $ill)
+                                                                                <option>{{$ill->name}}</option>
+                                                                            @endforeach
                                                                           </select>
                                                                     </form>
                                                                 </li>
@@ -175,10 +179,10 @@
                                         <td>Tripp Enevold</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient3">
+                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient3{{$ward->id}}">
                                                 Info
                                             </button>
-                                            <div class="modal fade" id="ModalPatient3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="ModalPatient3{{$ward->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -197,7 +201,9 @@
                                                                     <form action="" class="row g-3">
                                                                         <select class="form-select" aria-label="Choroba">
                                                                             <option selected>Choroba</option>
-
+                                                                            @foreach($illnesses as $ill)
+                                                                                <option>{{$ill->name}}</option>
+                                                                            @endforeach
                                                                           </select>
                                                                     </form>
                                                                 </li>
@@ -224,10 +230,10 @@
                                         <td>Alla Hooper</td>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient4">
+                                            <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatient4{{$ward->id}}">
                                                 Info
                                             </button>
-                                            <div class="modal fade" id="ModalPatient4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="ModalPatient4{{$ward->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
@@ -246,7 +252,9 @@
                                                                     <form action="" class="row g-3">
                                                                         <select class="form-select" aria-label="Choroba">
                                                                             <option selected>Choroba</option>
-
+                                                                            @foreach($illnesses as $ill)
+                                                                                <option>{{$ill->name}}</option>
+                                                                            @endforeach
                                                                           </select>
                                                                     </form>
                                                                 </li>
@@ -266,10 +274,10 @@
                                     </tr>
                                     <tr class="mb-3">
                                         <td colspan="8" class="text-center">
-                                            <button type="button" class="btn btn-primary ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatients1">
+                                            <button type="button" class="btn btn-primary ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalPatients{{$ward->id}}">
                                                 Dodaj pacjenta
                                             </button>
-                                            <div class="modal fade" id="ModalPatients1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="ModalPatients{{$ward->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="modal-content">
                                                     <div class="modal-header">
