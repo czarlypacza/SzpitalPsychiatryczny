@@ -19,6 +19,16 @@ class IllnessController extends Controller
         return redirect('admin');
     }
 
+    public function update(Request $request):RedirectResponse{
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        DB::update('exec updateIllness ?, ?, ?', [$request->input('id'), $request->input('name'), $request->input('description')]);
+
+
+        return redirect('admin');
+    }
+
     public function destroy($id)
     {
         Illness::destroy($id);

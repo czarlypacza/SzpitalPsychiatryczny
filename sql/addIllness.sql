@@ -7,9 +7,11 @@ CREATE OR ALTER PROCEDURE ADDILLNESS @NAME VARCHAR(
 
 SET @ILOSC = (
     SELECT
-        COUNT(ID)
+        COUNT(id)
     FROM
-        ILLNESSES
+        illnesses
+	WHERE
+		name = @name
 )
 
 IF (@ILOSC=0)

@@ -26,14 +26,16 @@ Route::get('/', function () {
 // });
 
 
-Route::get('/admin',[Controller::class,'admin']);
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/admin',[Controller::class,'admin']);
+
 Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 
-//Route::delete('/illnesses/{id}', [IllnessController::class, 'destroy', 'id' => $id])->name('illnesses.destroy');
+Route::post('/admin/updateIllness',[IllnessController::class,'update']);
 
 Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');

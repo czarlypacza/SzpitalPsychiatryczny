@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Szpital psychiatryczny</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -616,6 +617,7 @@
                     <td>{{$illness->name}}</td>
                     <td>{{$illness->description}}</td>
                     <td>
+                        <button type="button" class="btn btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $illness->id }}" data-name="{{ $illness->name }}" data-description="{{ $illness->description }}">Edytuj</button>
                         <form action="{{ route('illnesses.destroy', ['id' => $illness->id]) }}" method="POST" id="delete-form">
                             @csrf
                             @method('DELETE')
@@ -654,6 +656,31 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edytuj Chorobę</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form id="editForm" action="{{ url('/admin/updateIllness') }}" method="POST">
+                                        @csrf
+
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id" id="illnessId">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control mb-3" name="name" id="illnessName" placeholder="Nazwa" aria-label="Nazwa">
+                                                <textarea class="form-control mb-3" rows="3" name="description" id="illnessDescription" placeholder="Opis"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" id="saveButton">Zapisz zmiany</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -664,6 +691,22 @@
 
 
     <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle edit button click
+            $('.editBtn').on('click', function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var description = $(this).data('description');
+                console.log();
+                // $('#editForm').attr('action', '/admin/updateIllness/');
+                $('#illnessId').val(id);
+                $('#illnessName').val(name);
+                $('#illnessDescription').val(description);
+            });
+        });
+    </script>
+
 </body>
 
 </html>
