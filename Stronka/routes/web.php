@@ -42,3 +42,6 @@ Route::post('/admin/updateIllness',[IllnessController::class,'update']);
 Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');
 
 Route::post('/admin/storeWard',[WardController::class,'store']);
+
+
+Route::post('/admin/updateWard',[WardController::class,'update']);

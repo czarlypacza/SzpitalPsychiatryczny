@@ -16,4 +16,13 @@ class WardController extends Controller
 
         return redirect('admin');
     }
+
+    public function update(Request $request):RedirectResponse{
+        $this->validate($request, [
+            'ward_name' => 'required',
+        ]);
+        DB::update('exec updateWard ?, ?', [$request->input('wardId'), $request->input('ward_name')]);
+
+        return redirect('admin');
+    }
 }

@@ -334,13 +334,45 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-center">
+                            <button  type="button" class="btn btn-lg btn-primary WardEdtBtn" data-bs-toggle="modal" data-bs-target="#EditWard" data-ward_id="{{ $ward->id }}" data-ward_name="{{ $ward->ward_name }}">Edytuj nazwe</button>
+                        </div>
+                        <div class="col text-center"><button type="button" class="btn btn-lg btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć oddiał? (SPOWODUJE TO USUNIĘCIE WSZYSTKICH PACJĘTÓW W TYM ODDZIALE)' )">Usuń oddzial</button></div>
                     </div>
                 </div>
             </div>
           </div>
         </div>
         @endforeach
+        <div class="modal fade" id="EditWard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edytuj oddział</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="WardForm" action="{{ url('/admin/updateWard') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="wardId" id="wardId">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="ward_name" id="ward_name" placeholder="nazwa oddziału">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="saveButton">Save changes</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
 
 
 
@@ -566,12 +598,20 @@
                 var id = $(this).data('id');
                 var name = $(this).data('name');
                 var description = $(this).data('description');
-                console.log();
                 // $('#editForm').attr('action', '/admin/updateIllness/');
                 $('#illnessId').val(id);
                 $('#illnessName').val(name);
                 $('#illnessDescription').val(description);
             });
+
+            $('.WardEdtBtn').on('click',function(){
+                var ward_id = $(this).data('ward_id');
+                var ward_name = $(this).data('ward_name');
+
+                $('#wardId').val(ward_id);
+                $('#ward_name').val(ward_name);
+            })
+
         });
     </script>
 
