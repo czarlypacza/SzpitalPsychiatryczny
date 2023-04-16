@@ -382,9 +382,6 @@
             </div>
         </div>
 
-
-
-
     <div class="container mb-4 mt-2">
         <div class="row justify-content-center">
             <div class="col-4 text-center">

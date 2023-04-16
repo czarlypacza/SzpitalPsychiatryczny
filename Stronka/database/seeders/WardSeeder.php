@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Doctor;
 use App\Models\Ward;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -16,8 +18,13 @@ class WardSeeder extends Seeder
      */
     public function run(): void
     {
+
         Schema::withoutForeignKeyConstraints(function () {
-            Ward::truncate();
+            //DB::table('wards')->truncate();
+
+            Schema::table('wards', function ($table) {
+                $table->truncate();
+            });
         });
 
         Ward::insert(

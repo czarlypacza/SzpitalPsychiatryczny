@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE updateWard @ID int
+CREATE OR ALTER PROCEDURE deleteWard @ID int
 AS
 DELETE FROM wards
 WHERE id = @ID;

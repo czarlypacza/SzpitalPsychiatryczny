@@ -40,3 +40,4 @@ insert into doctors (first_name, last_name, specialization, phone_number, ward_i
 insert into doctors (first_name, last_name, specialization, phone_number, ward_id) values ( 'Ainslee', 'Molan', 'Lamotrigine', '231-167-8604', 12);
 insert into doctors (first_name, last_name, specialization, phone_number, ward_id) values ( 'Den', 'Sked', 'Topiramate', '221-991-2198', 18);
 
+SELECT * FROM doctors
