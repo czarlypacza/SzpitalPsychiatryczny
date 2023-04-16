@@ -45,3 +45,5 @@ Route::post('/admin/storeWard',[WardController::class,'store']);
 
 
 Route::post('/admin/updateWard',[WardController::class,'update']);
+
+Route::delete('/admin/destroyWard/{id}', [WardController::class, 'destroy' ])->name('wards.destroy');

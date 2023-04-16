@@ -25,4 +25,9 @@ class WardController extends Controller
 
         return redirect('admin');
     }
+    public function destroy($id)
+    {
+        DB::delete('exec deleteWard ?', [$id]);
+        return redirect('admin');
+    }
 }

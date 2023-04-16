@@ -343,7 +343,15 @@
                         <div class="col text-center">
                             <button  type="button" class="btn btn-lg btn-primary WardEdtBtn" data-bs-toggle="modal" data-bs-target="#EditWard" data-ward_id="{{ $ward->id }}" data-ward_name="{{ $ward->ward_name }}">Edytuj nazwe</button>
                         </div>
-                        <div class="col text-center"><button type="button" class="btn btn-lg btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć oddiał? (SPOWODUJE TO USUNIĘCIE WSZYSTKICH PACJĘTÓW W TYM ODDZIALE)' )">Usuń oddzial</button></div>
+                        <div class="col text-center">
+                            <form action="{{ route('wards.destroy', ['id' => $ward->id]) }}" method="POST" id="delete-ward-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-lg btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć oddiał?' )">Usuń oddzial</button>
+
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
