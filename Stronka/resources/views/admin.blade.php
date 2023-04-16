@@ -429,38 +429,17 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($doctors as $doctor)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Alla Hooper</td>
-                    <td>PROVIGIL</td>
-                    <td>390-165-0329</td>
-                    <td></td>
+                    <th scope="row">{{$doctor->id}}</th>
+                    <td>{{$doctor->first_name}} {{$doctor->last_name}}</td>
+                    <td>{{$doctor->specialization}}</td>
+                    <td>{{$doctor->phone_number}}</td>
+                    <td>{{$doctor->ward->ward_name}}</td>
 
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Bev Barham</td>
-                    <td>Molds, Rusts and Smuts, Epicoccum nigrum</td>
-                    <td>513-249-8833</td>
-                    <td></td>
+                @endforeach
 
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Joanna Cotta</td>
-                    <td>CD DIORSKIN CITY DEFENSE Toxin Shield Pollution UV Advanced Protection with sunscreen Broad Spectrum SPF50</td>
-                    <td>881-689-2873</td>
-                    <td></td>
-
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Tripp Enevold</td>
-                    <td>Gabapentin</td>
-                    <td>828-846-4763</td>
-                    <td></td>
-
-                </tr>
                 <tr class="mb-3">
                     <td colspan="5" class="text-center">
                         <button type="button" class="btn btn-primary ms-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalDoctors">
