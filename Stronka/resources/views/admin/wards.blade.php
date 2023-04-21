@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('shared/nav')
+    @include('shared/admin_nav')
 
     <div class="container mb-3">
         <h2>Oddziały</h2>
@@ -329,7 +329,7 @@
                             <button  type="button" class="btn btn-lg btn-primary WardEdtBtn" data-bs-toggle="modal" data-bs-target="#EditWard" data-ward_id="{{ $ward->id }}" data-ward_name="{{ $ward->ward_name }}">Edytuj nazwe</button>
                         </div>
                         <div class="col text-center">
-                            <form action="{{ route('wards.destroy', ['id' => $ward->id]) }}" method="POST" id="delete-ward-form">
+                            <form action="{{ route('wards.destroy', ['ward' => $ward]) }}" method="POST" id="delete-ward-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-lg btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć oddiał?' )">Usuń oddzial</button>
@@ -350,8 +350,9 @@
                   <h5 class="modal-title" id="exampleModalLabel">Edytuj oddział</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="WardForm" action="{{ url('/admin/updateWard') }}" method="POST">
+                <form id="WardForm" action="{{ route('wards.update',['ward'=>$ward])}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="modal-body">
                         <input type="hidden" name="wardId" id="wardId">
                         <div class="mb-3">
@@ -381,7 +382,7 @@
                           <h5 class="modal-title" id="exampleModalLabel">Dodaj oddział</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="WardForm" action="{{ url('/admin/storeWard') }}" method="POST">
+                        <form id="WardForm" action="{{ route('wards.store') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div class="mb-3">

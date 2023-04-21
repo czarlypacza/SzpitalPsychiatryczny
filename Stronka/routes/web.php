@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use  App\Http\Controllers\IllnessController;
 use  App\Http\Controllers\WardController;
+use  App\Http\Controllers\DoctorController;
 use App\Models\Illness;
 
 
@@ -39,7 +40,9 @@ Route::resource('illnesses',IllnessController::class);
 
 Route::resource('wards',WardController::class);
 
-Route::get('/admin',[Controller::class,'admin']);
+Route::resource('doctors',DoctorController::class);
+
+Route::get('/admin',[Controller::class,'admin'])->name('admin');
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 

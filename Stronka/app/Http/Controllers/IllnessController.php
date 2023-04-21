@@ -61,9 +61,9 @@ class IllnessController extends Controller
         return redirect('illnesses');
     }
 
-    public function destroy($id)
+    public function destroy(Illness $illness)
     {
-        Illness::destroy($id);
+        Illness::destroy($illness->id);
         return redirect('illnesses');
     }
 

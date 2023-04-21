@@ -8,7 +8,13 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a href="{{route('admin')}}" class="nav-link">Start</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('wards.index')}}" class="nav-link">Oddziały</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('doctors.index')}}" class="nav-link">Lekarze</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('illnesses.index')}}" class="nav-link">Choroby</a>

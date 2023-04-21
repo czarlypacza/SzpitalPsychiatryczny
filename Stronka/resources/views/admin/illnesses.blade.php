@@ -32,7 +32,7 @@
                 <td>{{$illness->description}}</td>
                 <td>
                     <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $illness->id }}" data-name="{{ $illness->name }}" data-description="{{ $illness->description }}">Edytuj</button>
-                    <form action="{{ route('illnesses.destroy', ['id' => $illness->id]) }}" method="POST" id="delete-form">
+                    <form action="{{ route('illnesses.destroy', ['illness' => $illness]) }}" method="POST" id="delete-form">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Czy na pewno usunąć wpis?')">Usuń</button>
@@ -53,7 +53,7 @@
                                     <h5 class="modal-title" id="exampleModalLabel">Dodaj Chorobe</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form id="illnessForm" action="{{ url('/admin/storeIllness') }}" method="POST">
+                                <form id="illnessForm" action="{{ route('illnesses.store') }}" method="POST">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -77,9 +77,9 @@
                                     <h5 class="modal-title" id="exampleModalLabel">Edytuj Chorobę</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form id="editForm" action="{{ url('/admin/updateIllness') }}" method="POST">
+                                <form id="editForm" action="{{ route('illnesses.update',['illness'=>$illness]) }}" method="POST">
                                     @csrf
-
+                                    @method('PUT')
                                     <div class="modal-body">
                                         <input type="hidden" name="id" id="illnessId">
                                         <div class="form-group">

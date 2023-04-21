@@ -65,9 +65,9 @@ class WardController extends Controller
 
         return redirect('wards');
     }
-    public function destroy($id)
+    public function destroy(Ward $ward)
     {
-        DB::delete('exec deleteWard ?', [$id]);
+        DB::delete('exec deleteWard ?', [$ward->id]);
         return redirect('wards');
     }
 }

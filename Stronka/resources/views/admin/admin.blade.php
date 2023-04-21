@@ -14,6 +14,21 @@
 <body>
     @include('shared/admin_nav')
 
+    <div class="row">
+        <div class="col col-10 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Witaj, admin</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{{--
     <div class="container mb-3">
         <h2>Zapisani pacjenci</h2>
     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -561,7 +576,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
 
 
