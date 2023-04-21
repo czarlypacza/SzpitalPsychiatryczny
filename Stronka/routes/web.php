@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\IllnessController;
-use App\Http\Controllers\WardController;
+use App\Http\Controllers\Controller;
+use  App\Http\Controllers\IllnessController;
+use  App\Http\Controllers\WardController;
+use App\Models\Illness;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,31 +20,35 @@ use App\Http\Controllers\WardController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('user/index');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/admin', function () {
-//     return view('admin');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+require __DIR__.'/auth.php';
 
+Route::resource('illnesses',IllnessController::class);
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('wards',WardController::class);
 
 Route::get('/admin',[Controller::class,'admin']);
 
-Route::post('/admin/storeIllness',[IllnessController::class,'store']);
+// Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 
-Route::post('/admin/updateIllness',[IllnessController::class,'update']);
+// Route::post('/admin/updateIllness',[IllnessController::class,'update']);
 
-Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');
+// Route::delete('/admin/destroyIllness/{id}', [IllnessController::class, 'destroy' ])->name('illnesses.destroy');
 
-Route::post('/admin/storeWard',[WardController::class,'store']);
+// Route::post('/admin/storeWard',[WardController::class,'store']);
 
-Route::post('/admin/updateWard',[WardController::class,'update']);
+// Route::post('/admin/updateWard',[WardController::class,'update']);
 
-Route::delete('/admin/destroyWard/{id}', [WardController::class, 'destroy' ])->name('wards.destroy');
+// Route::delete('/admin/destroyWard/{id}', [WardController::class, 'destroy' ])->name('wards.destroy');

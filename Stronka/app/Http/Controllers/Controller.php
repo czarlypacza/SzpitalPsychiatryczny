@@ -14,6 +14,7 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     public function admin(){
-        return view('admin',['illnesses'=>Illness::all(),'wards'=>Ward::all(),'doctors'=>Doctor::all()]);
+
+        return view('admin/admin',['illnesses'=>Illness::all(),'wards'=>Ward::all(),'doctors'=>Doctor::all()]);
     }
 }
