@@ -61,7 +61,17 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $address->find($request->e_id)->update([
+            'voivodeship'=>$request->e_voivodeship,
+            'city'=>$request->e_city,
+            'street'=>$request->e_street,
+            'house_number'=>$request->e_house_number,
+            'flat_number'=>$request->e_flat_number,
+            'postal_code'=>$request->e_postal_code,
+        ]);
+            //$request->all());
+        return redirect()->route('address.index');
+
     }
 
     /**
@@ -69,6 +79,7 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        Address::destroy($address->id);
+        return redirect()->route('address.index');
     }
 }
