@@ -14,9 +14,9 @@ class IllnessSeeder extends Seeder
      */
     public function run(): void
     {
-        Schema::withoutForeignKeyConstraints(function () {
+        /*Schema::withoutForeignKeyConstraints(function () {
             Illness::truncate();
-        });
+        });*/
 
         Illness::insert(
             [

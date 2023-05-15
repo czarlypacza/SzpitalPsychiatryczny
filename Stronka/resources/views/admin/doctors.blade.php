@@ -37,8 +37,8 @@
                     <td>{{$doctor->phone_number}}</td>
                     <td>{{$doctor->ward->ward_name}}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="" data-bs-target="#" >Edytuj</button>
-                        <form action="{{route('doctors.destroy',['doctor'=>$doctor])}}" method="POST" id="delete-form">
+                    <button type="button" class="btn btn-sm btn-primary editDoctorBtn" data-bs-toggle="modal" data-bs-target="#ModalEditDoctors" data-id="{{$doctor->id}}" data-first_name="{{$doctor->first_name}}" data-last_name="{{$doctor->last_name}}" data-specialization="{{$doctor->specialization}}" data-tel="{{$doctor->phone_number}}" data-ward_id="{{$doctor->ward->id}}" data-ward_name="{{$doctor->ward->ward_name}}">Edytuj</button>
+                        <form action="{{route('doctors.destroy',['doctor'=>$doctor]) }}" method="POST" id="delete-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Czy na pewno usunąć wpis?')">Usuń</button>
@@ -70,13 +70,54 @@
                                             <input type="text" class="form-control mb-3" name="d_specialization" id="d_specialization" placeholder="Specjalizacja" aria-label="Specjalizacja">
                                             <div class="input-group mb-3">
                                                 <input name="d_tel" id="d_tel" type="text" class="form-control" placeholder="Tel." aria-label="Tel.">
-                                                <!--<input type="text" class="form-control" placeholder="Oddział" aria-label="Oddział">-->
+                                                <!--<input type="t" class="forontrol" placeholder="Oddział" aria-label="Oddział">-->
                                                 <select name="d_ward" id="d_ward" class="form-select" aria-label="Oddzial" aria-placeholder="Oddzial">
-
                                                     @forelse ($wards as $ward)
                                                         <option >{{$ward->ward_name}}</option>
                                                     @empty
                                                         <option selected>Oddzial</option>
+                                                    @endforelse
+                                                  </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="ModalEditDoctors" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Edytuj Lekarza</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form id="EditDoctorsForm" action="{{route('doctors.update',['doctor'=>$doctor])}}" class="row g-3" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="col">
+                                                <input name="id" id="id" type="hidden">
+                                            <div class="input-group mb-3">
+                                                <input name="first_name" id="first_name" type="text" class="form-control" placeholder="Imie" aria-label="Imie">
+                                                <input name="last_name" id="last_name" type="text" class="form-control" placeholder="Nazwisko" aria-label="Nazwisko">
+                                            </div>
+                                            <input type="text" class="form-control mb-3" name="specialization" id="specialization" placeholder="Specjalizacja" aria-label="Specjalizacja">
+                                            <div class="input-group mb-3">
+                                                <input name="phone_number" id="phone_number" type="text" class="form-control" placeholder="Tel." aria-label="Tel.">
+                                                <!--<input type="text" class="form-control" placeholder="Oddział" aria-label="Oddział">-->
+{{--                                                <input name="ward_id" id="ward_id" type="hidden">--}}
+                                                <select name="ward_id" id="ward_name" class="form-select" aria-label="Oddzial" aria-placeholder="Oddzial">
+
+                                                    @forelse ($wards as $ward)
+                                                        <option value="{{$ward->id}}">{{$ward->ward_name}}</option>
+                                                    @empty
+
                                                     @endforelse
                                                   </select>
                                             </div>
@@ -98,19 +139,26 @@
     <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
     <script>
         $(document).ready(function() {
-            // Handle edit button click
-            $('.editBtn').on('click', function() {
+            $('.editDoctorBtn').on('click', function() {
                 var id = $(this).data('id');
-                var name = $(this).data('name');
-                var description = $(this).data('description');
+                var first_name = $(this).data('first_name');
+                var last_name = $(this).data('last_name');
+                var specialization = $(this).data('specialization');
+                var phone = $(this).data('tel');
+                var ward_name = $(this).data('ward_name');
+                var ward_id = $(this).data('ward_id');
                 // $('#editForm').attr('action', '/admin/updateIllness/');
-                $('#illnessId').val(id);
-                $('#illnessName').val(name);
-                $('#illnessDescription').val(description);
+                $('#id').val(id);
+                $('#first_name').val(first_name);
+                $('#last_name').val(last_name);
+                $('#specialization').val(specialization);
+                $('#phone_number').val(phone);
+                $('#ward_name').val(ward_id);
+                $('#ward_id').val(ward_id);
             });
 
             $('.WardEdtBtn').on('click',function(){
-                var ward_id = $(this).data('ward_id');
+                //var ward_id = $(this).data('ward_id');
                 var ward_name = $(this).data('ward_name');
 
                 $('#wardId').val(ward_id);

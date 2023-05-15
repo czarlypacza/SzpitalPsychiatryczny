@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(WardSeeder::class);
         $this->call(DoctorSeeder::class);
         $this->call(AddressSeeder::class);
+        $this->call(IllnessSeeder::class);
+        $this->call(PatientSeeder::class);
+        $this->call(illness_patientSeeder::class);
         //DB::statement(' EXEC sp_MSforeachtable "ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"');
     }
 }
