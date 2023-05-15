@@ -107,6 +107,6 @@ insert into addresses ( voivodeship, city, street, house_number, flat_number, po
 insert into addresses ( voivodeship, city, street, house_number, flat_number, postal_code) values ( 'lubuskie', 'Fengshuling', 'Dennis', 225, 28, '7090');
 insert into addresses ( voivodeship, city, street, house_number, flat_number, postal_code) values ( 'wielkopolskie', 'Chengxi', 'Dahle', 189, 106, '7090');
 insert into addresses ( voivodeship, city, street, house_number, flat_number, postal_code) values ( 'opolskie', 'Shurugwi', 'Hansons', 156, 19, '7090');
-insert into addresses ( voivodeship, city, street, house_number, flat_number, postal_code) values ( 'mazowieckie', 'Melrose', 'Alpine', 255, 100, NULL);
+insert into addresses ( voivodeship, city, street, house_number, flat_number, postal_code) values ( 'mazowieckie', 'Melrose', 'Alpine', 255, 100, '41380');
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use  App\Http\Controllers\IllnessController;
 use  App\Http\Controllers\WardController;
 use  App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AddressController;
 use App\Models\Illness;
 
 
@@ -21,7 +22,7 @@ use App\Models\Illness;
 */
 
 Route::get('/', function () {
-    return view('user/index');
+    return view('admin/admin');
 });
 
 Route::get('/dashboard', function () {
@@ -41,6 +42,8 @@ Route::resource('illnesses',IllnessController::class);
 Route::resource('wards',WardController::class);
 
 Route::resource('doctors',DoctorController::class);
+
+Route::resource('address',AddressController::class);
 
 Route::get('/admin',[Controller::class,'admin'])->name('admin');
 

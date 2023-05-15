@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Ward;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class DoctorController extends Controller
 {
@@ -66,9 +67,21 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Doctor $doctor)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            // 'specialization' => 'required',
+            // 'tel' => 'required',
+            // 'ward' => 'required',
+        ]);
+
+        $doctor->find($request->id)->update($request->all());
+        //$doctor->update($request->all());
+        return redirect('doctors');
+        //return $request;
+
     }
 
     /**

@@ -22,9 +22,7 @@ class WardSeeder extends Seeder
         Schema::withoutForeignKeyConstraints(function () {
             //DB::table('wards')->truncate();
 
-            Schema::table('wards', function ($table) {
-                $table->truncate();
-            });
+            Ward::truncate();
         });
 
         Ward::insert(
