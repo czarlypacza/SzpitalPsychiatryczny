@@ -108,13 +108,22 @@ class PatientController extends Controller
     public function filterPatients(Request $request)
     {
         $input = $request->get('filter');
-        // Explode the input into an array
-        $parts = explode(" ", $input, 2);
-        // Get the first and second part
-        $condition = $parts[0] ?? '';
-        $value = $parts[1] ?? '';
 
-        return $parts;
+        // Split the input into separate condition-value pairs
+        $pairs = explode(";", $input);
+
+        $conditions = [];
+        foreach ($pairs as $pair) {
+            // Split each pair into condition and value
+            $parts = explode(" ", trim($pair), 2);
+
+            if (count($parts) == 2) {
+                // Store each condition and value in an associative array
+                $conditions[trim($parts[0])] = trim($parts[1]);
+            }
+        }
+
+        return $conditions;
         //return redirect()->route('patients.show', ['condition' => $condition, 'value' => $value]);
     }
 
