@@ -8,6 +8,7 @@ use  App\Http\Controllers\WardController;
 use  App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AddressController;
 use App\Models\Illness;
+use App\Http\Controllers\PatientController;
 
 
 /*
@@ -45,7 +46,13 @@ Route::resource('doctors',DoctorController::class);
 
 Route::resource('address',AddressController::class);
 
+Route::resource('patients',PatientController::class);
+
 Route::get('/admin',[Controller::class,'admin'])->name('admin');
+
+Route::post('/illness_patient',[Controller::class,'illness_patient'])->name('insert_illness_patient');
+
+Route::delete('/illness_patient/{patient}/{illness}', [Controller::class, 'd_illness_patient'])->name('destroy_illness_patient');
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 

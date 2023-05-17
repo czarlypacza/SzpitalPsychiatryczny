@@ -11,6 +11,9 @@
                     <a href="{{route('admin')}}" class="nav-link">Start</a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('patients.index')}}" class="nav-link">Pacjenci</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('wards.index')}}" class="nav-link">Oddziały</a>
                 </li>
                 <li class="nav-item">

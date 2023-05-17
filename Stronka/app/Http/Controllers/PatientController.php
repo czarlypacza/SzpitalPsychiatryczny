@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Illness;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use  App\Models\Doctor;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -12,7 +15,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        return view('patient.index', ['patients' => Patient::all(),'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
     }
 
     /**
@@ -28,7 +31,26 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'age'=>'required',
+            'phone_number'=>'required',
+            'pesel'=>'required',
+            'height'=>'required',
+            'weight'=>'required',
+            'voivodeship'=>'required',
+            'city'=>'required',
+            'street'=>'required',
+            'house_number'=>'required',
+            'flat_number'=>'required',
+            'postcode'=>'required',
+            'doctor_id'=>'required',
+        ]);
+
+        DB::insert('exec addPatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -52,7 +74,26 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+        $this->validate($request, [
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'age'=>'required',
+            'phone_number'=>'required',
+            'pesel'=>'required',
+            'height'=>'required',
+            'weight'=>'required',
+            'voivodeship'=>'required',
+            'city'=>'required',
+            'street'=>'required',
+            'house_number'=>'required',
+            'flat_number'=>'required',
+            'postal_code'=>'required',
+            'doctor_id'=>'required',
+        ]);
+
+        DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -60,6 +101,7 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $patient->delete();
+        return redirect()->route('patients.index');
     }
 }

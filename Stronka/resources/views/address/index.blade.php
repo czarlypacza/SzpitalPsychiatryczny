@@ -76,8 +76,24 @@
                                 <div class="modal-body">
                                     <div class="col">
                                         <div class="input-group mb-3">
-                                            <input name="voivodeship" id="voivodeship" type="text" class="form-control"
-                                                   placeholder="Województwo" aria-label="Województwo">
+                                            <select name="voivodeship" class="form-select" aria-label="Województwo">
+                                                <option value="dolnośląskie">Dolnośląskie</option>
+                                                <option value="kujawsko-pomorskie">Kujawsko-Pomorskie</option>
+                                                <option value="lubelskie">Lubelskie</option>
+                                                <option value="lubuskie">Lubuskie</option>
+                                                <option value="łódzkie">Łódzkie</option>
+                                                <option value="małopolskie">Małopolskie</option>
+                                                <option value="mazowieckie">Mazowieckie</option>
+                                                <option value="opolskie">Opolskie</option>
+                                                <option value="podkarpackie" selected>Podkarpackie</option>
+                                                <option value="podlaskie">Podlaskie</option>
+                                                <option value="pomorskie">Pomorskie</option>
+                                                <option value="śląskie">Śląskie</option>
+                                                <option value="świętokrzyskie">Świętokrzyskie</option>
+                                                <option value="warmińsko-mazurskie">Warmińsko-Mazurskie</option>
+                                                <option value="wielkopolskie">Wielkopolskie</option>
+                                                <option value="zachodniopomorskie">Zachodniopomorskie</option>
+                                            </select>
                                             <input name="city" id="city" type="text" class="form-control"
                                                    placeholder="Miasto" aria-label="Miasto">
                                         </div>

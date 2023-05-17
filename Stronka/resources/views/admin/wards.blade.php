@@ -57,8 +57,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr
-                                        >
+                                        <tr>
                                             <th scope="row">1</th>
                                             <td>Kirk Wornum</td>
                                             <td>63</td>

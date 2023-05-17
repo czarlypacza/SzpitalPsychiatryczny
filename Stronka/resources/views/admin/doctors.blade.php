@@ -108,55 +108,55 @@
                 </div>
 
                 <div class="modal fade" id="ModalEditDoctors" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edytuj Lekarza</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <form id="EditDoctorsForm" action="{{route('doctors.update',['doctor'=>$doctor])}}"
-                                  class="row g-3" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="col">
-                                        <input name="id" id="id" type="hidden">
-                                        <div class="input-group mb-3">
-                                            <input name="first_name" id="first_name" type="text" class="form-control"
-                                                   placeholder="Imie" aria-label="Imie">
-                                            <input name="last_name" id="last_name" type="text" class="form-control"
-                                                   placeholder="Nazwisko" aria-label="Nazwisko">
-                                        </div>
-                                        <input type="text" class="form-control mb-3" name="specialization"
-                                               id="specialization" placeholder="Specjalizacja"
-                                               aria-label="Specjalizacja">
-                                        <div class="input-group mb-3">
-                                            <input name="phone_number" id="phone_number" type="text"
-                                                   class="form-control" placeholder="Tel." aria-label="Tel.">
-                                            <!--<input type="text" class="form-control" placeholder="Oddział" aria-label="Oddział">-->
-                                            {{--                                                <input name="ward_id" id="ward_id" type="hidden">--}}
-                                            <select name="ward_id" id="ward_name" class="form-select"
-                                                    aria-label="Oddzial" aria-placeholder="Oddzial">
+                               aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edytuj Lekarza</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <form id="EditDoctorsForm" action="{{route('doctors.update',['doctor'=>$doctor])}}"
+                                      class="row g-3" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="col">
+                                            <input name="id" id="id" type="hidden">
+                                            <div class="input-group mb-3">
+                                                <input name="first_name" id="first_name" type="text" class="form-control"
+                                                       placeholder="Imie" aria-label="Imie">
+                                                <input name="last_name" id="last_name" type="text" class="form-control"
+                                                       placeholder="Nazwisko" aria-label="Nazwisko">
+                                            </div>
+                                            <input type="text" class="form-control mb-3" name="specialization"
+                                                   id="specialization" placeholder="Specjalizacja"
+                                                   aria-label="Specjalizacja">
+                                            <div class="input-group mb-3">
+                                                <input name="phone_number" id="phone_number" type="text"
+                                                       class="form-control" placeholder="Tel." aria-label="Tel.">
+                                                <!--<input type="text" class="form-control" placeholder="Oddział" aria-label="Oddział">-->
+                                                {{--                                                <input name="ward_id" id="ward_id" type="hidden">--}}
+                                                <select name="ward_id" id="ward_name" class="form-select"
+                                                        aria-label="Oddzial" aria-placeholder="Oddzial">
 
-                                                @forelse ($wards as $ward)
-                                                    <option value="{{$ward->id}}">{{$ward->ward_name}}</option>
-                                                @empty
+                                                    @forelse ($wards as $ward)
+                                                        <option value="{{$ward->id}}">{{$ward->ward_name}}</option>
+                                                    @empty
 
-                                                @endforelse
-                                            </select>
+                                                    @endforelse
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </td>
         </tr>
