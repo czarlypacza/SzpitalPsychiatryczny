@@ -15,7 +15,7 @@
 @include('shared/admin_nav')
 <div class="container mb-5">
     <h2>Pacjeci</h2>
-    <form action="" method="get">
+    <form action="{{route('filterPatients')}}" method="get">
         <div class="input-group mb-3">
             <input name="filter" type="text" class="form-control" aria-label="email"
                    aria-describedby="button-addon2">
@@ -24,6 +24,7 @@
             </button>
         </div>
     </form>
+
     <table class="table-striped table">
         <thead>
         <tr>

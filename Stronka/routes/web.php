@@ -46,7 +46,10 @@ Route::resource('doctors',DoctorController::class);
 
 Route::resource('address',AddressController::class);
 
-Route::resource('patients',PatientController::class);
+Route::resource('patients',PatientController::class)->except('show');
+
+Route::get('/filterPatients', [PatientController::class,'filterPatients'])->name('filterPatients');
+
 
 Route::get('/admin',[Controller::class,'admin'])->name('admin');
 

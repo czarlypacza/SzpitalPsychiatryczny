@@ -104,4 +104,18 @@ class PatientController extends Controller
         $patient->delete();
         return redirect()->route('patients.index');
     }
+
+    public function filterPatients(Request $request)
+    {
+        $input = $request->get('filter');
+        // Explode the input into an array
+        $parts = explode(" ", $input, 2);
+        // Get the first and second part
+        $condition = $parts[0] ?? '';
+        $value = $parts[1] ?? '';
+
+        return $parts;
+        //return redirect()->route('patients.show', ['condition' => $condition, 'value' => $value]);
+    }
+
 }
