@@ -122,26 +122,39 @@ class PatientController extends Controller
                 $conditions[trim($parts[0])] = trim($parts[1]);
             }
         }
-        $patients = collect();
+
+        $results = [];
 
         // Iterate over each condition-value pair
         foreach ($conditions as $condition => $value) {
             // Execute the stored procedure for each condition
-            $results = DB::select('exec searchPatients ?,?',[$condition, $value]);
+            $result = DB::select('exec searchPatients ?,?',[$condition, $value]);
 
             // Map over the results to create new Eloquent models
-            foreach ($results as $result) {
+            $temp = [];
+            foreach ($result as $r) {
                 // Create a new Patient model for each result
-                $patient = Patient::where('id',$result->id)->first();
+                $patient = Patient::where('id', $r->id)->first();
 
                 // Load the patient's doctor and address
                 $patient->load('doctor', 'address');
 
-                $patients->push($patient);
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
             }
+            // Push to results array
+            $results[] = $temp;
         }
-        //return $patients[0] ;
+
+        // Find common patients
+        $patients = collect($results[0]);
+        for ($i=1; $i<count($results); $i++) {
+            $patients = $patients->intersectByKeys(collect($results[$i]));
+        }
+
         return view('patient.index', ['patients' => $patients ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
     }
+
+
 
 }
