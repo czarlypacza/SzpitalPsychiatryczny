@@ -25,3 +25,18 @@ BEGIN
         @DESCRIPTION
     );
 END
+
+
+
+--mysql
+-- DELIMITER //
+-- CREATE PROCEDURE ADDILLNESS(IN in_name VARCHAR(60), IN in_description VARCHAR(150))
+-- BEGIN
+--   DECLARE count INT;
+--   SELECT COUNT(id) INTO count FROM illnesses WHERE name = in_name;
+
+--   IF count = 0 THEN
+--     INSERT INTO ILLNESSES (name, description) VALUES (in_name, in_description);
+--   END IF;
+-- END //
+-- DELIMITER ;
