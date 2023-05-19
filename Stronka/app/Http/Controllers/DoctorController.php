@@ -17,7 +17,7 @@ class DoctorController extends Controller
     public function index()
     {
         return view('admin/doctors',[
-            'doctors'=>Doctor::all(),
+            'doctors'=>Doctor::paginate(15),
             'wards'=>Ward::all()
         ]);
     }
@@ -92,59 +92,4 @@ class DoctorController extends Controller
         Doctor::destroy($doctor->id);
         return redirect('doctors');
     }
-
-    public function filterDoctors(Request $request)
-    {
-        $input = $request->get('filter');
-
-        // Split the input into separate condition-value pairs
-        $pairs = explode(";", $input);
-
-        $conditions = [];
-        foreach ($pairs as $pair) {
-            // Split each pair into condition and value
-            $parts = explode(":", trim($pair), 2);
-
-            if (count($parts) == 2) {
-                // Store each condition and value in an associative array
-                $conditions[trim($parts[0])] = trim($parts[1]);
-            }
-        }
-
-        $results = [];
-
-        // Iterate over each condition-value pair
-        foreach ($conditions as $condition => $value) {
-            // Execute the stored procedure for each condition
-            $result = DB::select('exec searchDoctors ?,?',[$condition, $value]);
-
-            // Map over the results to create new Eloquent models
-            $temp = [];
-            foreach ($result as $r) {
-                // Create a new Doctor model for each result
-                $doctor = Doctor::where('id', $r->id)->first();
-
-                // Load the doctor's ward
-                $doctor->load('ward');
-
-                // Store each doctor in the results array
-                $temp[$doctor->id] = $doctor;
-            }
-            // Push to results array
-            $results[] = $temp;
-        }
-
-        // Find common doctors
-        $doctors = collect($results[0]);
-        for ($i=1; $i<count($results); $i++) {
-            $doctors = $doctors->intersectByKeys(collect($results[$i]));
-        }
-
-        return view('admin/doctors',[
-            'doctors'=>$doctors,
-            'wards'=>Ward::all()
-        ]);
-    }
-
-
 }

@@ -15,7 +15,7 @@ class IllnessController extends Controller
     public function index()
     {
         return view('admin/illnesses', [
-            'illnesses'=>Illness::all()
+            'illnesses'=>Illness::paginate(15)
         ]);
     }
 
@@ -67,52 +67,4 @@ class IllnessController extends Controller
         return redirect('illnesses');
     }
 
-    public function filterIllnesses(Request $request)
-    {
-        $input = $request->get('filter');
-
-        // Split the input into separate condition-value pairs
-        $pairs = explode(";", $input);
-
-        $conditions = [];
-        foreach ($pairs as $pair) {
-            // Split each pair into condition and value
-            $parts = explode(" ", trim($pair), 2);
-
-            if (count($parts) == 2) {
-                // Store each condition and value in an associative array
-                $conditions[trim($parts[0])] = trim($parts[1]);
-            }
-        }
-
-        $results = [];
-
-        // Iterate over each condition-value pair
-        foreach ($conditions as $condition => $value) {
-            // Execute the stored procedure for each condition
-            $result = DB::select('exec searchIllnesses ?,?', [$condition, $value]);
-
-            // Map over the results to create new Eloquent models
-            $temp = [];
-            foreach ($result as $r) {
-                // Create a new Doctor model for each result
-                $illness = Illness::where('id', $r->id)->first();
-
-                // Store each doctor in the results array
-                $temp[$illness->id] = $illness;
-            }
-            // Push to results array
-            $results[] = $temp;
-        }
-
-        // Find common doctors
-        $illnesses = collect($results[0]);
-        for ($i = 1; $i < count($results); $i++) {
-            $illnesses = $illnesses->intersectByKeys(collect($results[$i]));
-        }
-
-        return view('admin/illnesses', [
-            'illnesses' => $illnesses
-        ]);
-    }
 }

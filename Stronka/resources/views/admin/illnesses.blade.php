@@ -108,6 +108,9 @@
             </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $illnesses->links() }}
+    </div>
 </div>
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 <script>

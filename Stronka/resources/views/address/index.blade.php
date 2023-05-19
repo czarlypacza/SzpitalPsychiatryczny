@@ -184,6 +184,9 @@
         </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $addresses->links() }}
+    </div>
 </div>
 
 

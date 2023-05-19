@@ -393,7 +393,9 @@
         </tr>
         </tbody>
     </table>
-
+    <div class="d-flex justify-content-center">
+        {{ $patients->links() }}
+    </div>
 </div>
 
 
