@@ -16,6 +16,15 @@
 
 <div class="container mb-5">
     <h2>Adresy</h2>
+    <form action="{{route('filterAddresses')}}" method="get">
+        <div class="input-group mb-3">
+            <input name="filter" type="text" class="form-control" aria-label="email"
+                   aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                Filtruj
+            </button>
+        </div>
+    </form>
     <table class="table-striped table">
         <thead>
         <tr>
@@ -26,6 +35,7 @@
             <th scope="col">Nr domu</th>
             <th scope="col">Nr mieszkania</th>
             <th scope="col">Kod pocztowy</th>
+            <th scope="col">Akcje</th>
         </tr>
         </thead>
         <tbody>

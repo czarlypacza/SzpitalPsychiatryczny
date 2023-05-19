@@ -50,6 +50,13 @@ Route::resource('patients',PatientController::class)->except('show');
 
 Route::get('/filterPatients', [PatientController::class,'filterPatients'])->name('filterPatients');
 
+Route::get('/filterWards', [WardController::class,'filterWards'])->name('filterWards');
+
+Route::get('/filterDoctors', [DoctorController::class,'filterDoctors'])->name('filterDoctors');
+
+Route::get('/filterIllnesses', [IllnessController::class,'filterIllnesses'])->name('filterIllnesses');
+
+Route::get('/filterAddresses', [AddressController::class,'filterAddresses'])->name('filterAddresses');
 
 Route::get('/admin',[Controller::class,'admin'])->name('admin');
 
