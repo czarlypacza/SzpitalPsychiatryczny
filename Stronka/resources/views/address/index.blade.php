@@ -184,9 +184,13 @@
         </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-2">
         {{ $addresses->links() }}
     </div>
+    <form action="{{route('exportAddresses')}}" method="get" class="d-flex justify-content-center">
+        <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
+    </form>
+
 </div>
 
 

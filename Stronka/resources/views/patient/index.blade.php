@@ -393,9 +393,12 @@
         </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-2">
         {{ $patients->links() }}
     </div>
+    <form action="{{route('exportPatients')}}" method="get" class="d-flex justify-content-center mb-2">
+        <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
+    </form>
 </div>
 
 

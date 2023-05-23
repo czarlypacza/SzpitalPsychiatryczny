@@ -497,6 +497,10 @@
                 </div>
             </div>
         </div>
+
+        <form action="{{route('exportWards')}}" method="get" class="d-flex justify-content-center mb-2">
+            <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
+        </form>
     </div>
 </div>
 

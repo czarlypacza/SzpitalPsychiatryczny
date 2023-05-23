@@ -108,9 +108,12 @@
             </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-2">
         {{ $illnesses->links() }}
     </div>
+    <form action="{{route('exportIllnesses')}}" method="get" class="d-flex justify-content-center mb-4">
+        <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
+    </form>
 </div>
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 <script>

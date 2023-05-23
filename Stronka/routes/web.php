@@ -9,7 +9,7 @@ use  App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AddressController;
 use App\Models\Illness;
 use App\Http\Controllers\PatientController;
-
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +63,16 @@ Route::get('/admin',[Controller::class,'admin'])->name('admin');
 Route::post('/illness_patient',[Controller::class,'illness_patient'])->name('insert_illness_patient');
 
 Route::delete('/illness_patient/{patient}/{illness}', [Controller::class, 'd_illness_patient'])->name('destroy_illness_patient');
+
+Route::get('/export/Addresses', [ExportController::class,'exportAddresses'])->name('exportAddresses');
+
+Route::get('/export/Illnesses', [ExportController::class,'exportIllnesses'])->name('exportIllnesses');
+
+Route::get('/export/Doctors', [ExportController::class,'exportDoctors'])->name('exportDoctors');
+
+Route::get('/export/Wards', [ExportController::class,'exportWards'])->name('exportWards');
+
+Route::get('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 

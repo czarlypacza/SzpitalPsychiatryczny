@@ -26,8 +26,6 @@ BEGIN
     );
 END
 
-
-
 --mysql
 -- DELIMITER //
 -- CREATE PROCEDURE ADDILLNESS(IN in_name VARCHAR(60), IN in_description VARCHAR(150))
