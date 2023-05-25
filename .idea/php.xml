@@ -125,6 +125,7 @@
       <path value="$PROJECT_DIR$/Stronka/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/Stronka/vendor/usmanhalalit/laracsv" />
       <path value="$PROJECT_DIR$/Stronka/vendor/league/csv" />
+      <path value="$PROJECT_DIR$/Stronka/vendor/league/flysystem-local" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

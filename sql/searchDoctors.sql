@@ -29,24 +29,27 @@ BEGIN
 END
 go
 
---mysql
+-- mysql
 -- DELIMITER //
--- CREATE PROCEDURE searchDoctors(IN condition VARCHAR(50), IN value VARCHAR(50))
+--
+-- CREATE PROCEDURE searchDoctors(IN cond VARCHAR(50), IN value VARCHAR(50))
 -- BEGIN
---   CASE
---     WHEN condition = 'Imie' THEN
---       SELECT * FROM Doctors WHERE first_name = value;
---     WHEN condition = 'Nazwisko' THEN
---       SELECT * FROM Doctors WHERE last_name = value;
---     WHEN condition = 'Specjalizacja' THEN
---       SELECT * FROM Doctors WHERE specialization = value;
---     WHEN condition = 'Tel' THEN
---       SELECT * FROM Doctors WHERE phone_number = value;
---     WHEN condition = 'Oddzial' THEN
---       SELECT d.*
---       FROM Doctors d
---       INNER JOIN wards w ON d.ward_id = w.id
---       WHERE w.ward_name = value;
---   END CASE;
+--             CASE
+--             WHEN cond = 'Imie' THEN
+--     SELECT * FROM Doctors WHERE first_name = value;
+--             WHEN cond = 'Nazwisko' THEN
+--     SELECT * FROM Doctors WHERE last_name = value;
+--             WHEN cond = 'Specjalizacja' THEN
+--     SELECT * FROM Doctors WHERE specialization = value;
+--             WHEN cond = 'Tel' THEN
+--     SELECT * FROM Doctors WHERE phone_number = value;
+--             WHEN cond = 'Oddzial' THEN
+--     SELECT d.*
+--     FROM Doctors d
+--              INNER JOIN wards w ON d.ward_id = w.id
+--     WHERE w.ward_name = value;
+-- END CASE;
 -- END //
+--
 -- DELIMITER ;
+

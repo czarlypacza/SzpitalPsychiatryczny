@@ -4,7 +4,7 @@ DELETE FROM wards
 WHERE id = @ID;
 
 
---mysql
+-- mysql
 -- DELIMITER //
 -- CREATE PROCEDURE deleteWard(IN id INT)
 -- BEGIN

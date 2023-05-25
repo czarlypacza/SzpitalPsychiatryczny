@@ -31,23 +31,26 @@ BEGIN
 END
 go
 
---mysql
+-- mysql
 -- DELIMITER //
--- CREATE PROCEDURE searchAddresses(IN condition VARCHAR(50), IN value VARCHAR(50))
+--
+-- CREATE PROCEDURE searchAddresses(IN cond VARCHAR(50), IN value VARCHAR(50))
 -- BEGIN
---   CASE
---     WHEN condition = 'Województwo' THEN
---       SELECT * FROM addresses WHERE voivodeship = value;
---     WHEN condition = 'Miasto' THEN
---       SELECT * FROM addresses WHERE city = value;
---     WHEN condition = 'Ulica' THEN
---       SELECT * FROM addresses WHERE street = value;
---     WHEN condition = 'Nr domu' THEN
---       SELECT * FROM addresses WHERE house_number = value;
---     WHEN condition = 'Nr mieszkania' THEN
---       SELECT * FROM addresses WHERE flat_number = value;
---     WHEN condition = 'Kod pocztowy' THEN
---       SELECT * FROM addresses WHERE postal_code = value;
---   END CASE;
+--     IF cond = 'Województwo' THEN
+--         SELECT * FROM addresses WHERE voivodeship = value;
+--         ELSEIF cond = 'Miasto' THEN
+--     SELECT * FROM addresses WHERE city = value;
+--             ELSEIF cond = 'Ulica' THEN
+--     SELECT * FROM addresses WHERE street = value;
+--             ELSEIF cond = 'Nr domu' THEN
+--     SELECT * FROM addresses WHERE house_number = value;
+--             ELSEIF cond = 'Nr mieszkania' THEN
+--     SELECT * FROM addresses WHERE flat_number = value;
+--             ELSEIF cond = 'Kod pocztowy' THEN
+--     SELECT * FROM addresses WHERE postal_code = value;
+-- END IF;
 -- END //
+--
 -- DELIMITER ;
+
+

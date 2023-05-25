@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AddressController extends Controller
 {
@@ -83,4 +85,60 @@ class AddressController extends Controller
         Address::destroy($address->id);
         return redirect()->route('address.index');
     }
+
+    public function filterAddresses(Request $request)
+    {
+        $input = $request->get('filter');
+
+        // Split the input into separate condition-value pairs
+        $pairs = explode(";", $input);
+
+        $conditions = [];
+        foreach ($pairs as $pair) {
+            // Split each pair into condition and value
+            $parts = explode(":", trim($pair), 2);
+
+            if (count($parts) == 2) {
+                // Store each condition and value in an associative array
+                $conditions[trim($parts[0])] = trim($parts[1]);
+            }
+        }
+
+        $results = [];
+
+        // Iterate over each condition-value pair
+        foreach ($conditions as $condition => $value) {
+            // Execute the stored procedure for each condition
+            $result = DB::select('exec searchAddresses ?,?',[$condition, $value]);
+
+            // Map over the results to create new Eloquent models
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Doctor model for each result
+                $address = Address::where('id', $r->id)->first();
+
+
+                // Store each doctor in the results array
+                $temp[$address->id] = $address;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+
+        // Find common doctors
+        $addresses = collect($results[0]);
+        for ($i=1; $i<count($results); $i++) {
+            $addresses = $addresses->intersectByKeys(collect($results[$i]));
+        }
+
+
+        $perPage = 15; // You can change this value as per your requirement.
+        $currentPage = Paginator::resolveCurrentPage() ?: 1;
+        $items = $addresses->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedItems = new LengthAwarePaginator($items, $addresses->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
+
+        return view('address.index', ['addresses' => $paginatedItems]);
+        //return $conditions;
+    }
+
 }

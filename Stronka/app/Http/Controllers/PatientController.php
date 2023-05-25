@@ -7,6 +7,8 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use  App\Models\Doctor;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PatientController extends Controller
 {
@@ -48,7 +50,10 @@ class PatientController extends Controller
             'doctor_id'=>'required',
         ]);
 
-        DB::insert('exec addPatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        //DB::insert('exec addPatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
+        DB::insert('call addPatient( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
 
         return redirect()->route('patients.index');
     }
@@ -91,7 +96,10 @@ class PatientController extends Controller
             'doctor_id'=>'required',
         ]);
 
-        DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        //DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
+        DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+
 
         return redirect()->route('patients.index');
     }
@@ -108,51 +116,47 @@ class PatientController extends Controller
     public function filterPatients(Request $request)
     {
         $input = $request->get('filter');
-
         // Split the input into separate condition-value pairs
         $pairs = explode(";", $input);
-
         $conditions = [];
         foreach ($pairs as $pair) {
             // Split each pair into condition and value
-            $parts = explode(" ", trim($pair), 2);
+            $parts = explode(":", trim($pair), 2);
 
             if (count($parts) == 2) {
                 // Store each condition and value in an associative array
                 $conditions[trim($parts[0])] = trim($parts[1]);
             }
         }
-
         $results = [];
-
         // Iterate over each condition-value pair
         foreach ($conditions as $condition => $value) {
             // Execute the stored procedure for each condition
             $result = DB::select('exec searchPatients ?,?',[$condition, $value]);
-
+            //$result = DB::select('call searchPatients ?,?',[$condition, $value]);
             // Map over the results to create new Eloquent models
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
                 $patient = Patient::where('id', $r->id)->first();
-
                 // Load the patient's doctor and address
                 $patient->load('doctor', 'address');
-
                 // Store each patient in the results array
                 $temp[$patient->id] = $patient;
             }
             // Push to results array
             $results[] = $temp;
         }
-
         // Find common patients
         $patients = collect($results[0]);
         for ($i=1; $i<count($results); $i++) {
             $patients = $patients->intersectByKeys(collect($results[$i]));
         }
-
-        return view('patient.index', ['patients' => $patients ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
+        $perPage = 15; // You can change this value as per your requirement.
+        $currentPage = Paginator::resolveCurrentPage() ?: 1;
+        $items = $patients->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedItems = new LengthAwarePaginator($items, $patients->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
+        return view('patient.index', ['patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
     }
 
 

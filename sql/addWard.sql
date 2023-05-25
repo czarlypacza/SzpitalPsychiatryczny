@@ -3,7 +3,7 @@ CREATE OR ALTER PROCEDURE addWard
 AS
 insert into wards(ward_name) values (@name);
 
---mysql
+-- mysql
 -- DELIMITER //
 -- CREATE PROCEDURE addWard(IN name varchar(50))
 -- BEGIN
