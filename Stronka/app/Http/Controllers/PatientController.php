@@ -96,9 +96,9 @@ class PatientController extends Controller
             'doctor_id'=>'required',
         ]);
 
-        //DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
-        DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        //DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
 
         return redirect()->route('patients.index');
@@ -115,7 +115,198 @@ class PatientController extends Controller
 
     public function filterPatients(Request $request)
     {
-        $input = $request->get('filter');
+
+
+        $results = [];
+
+        if ($request->has('imie')){
+            $result = DB::select('exec searchPatients ?,?',['Imie', $request->first_name]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+
+        if ($request->has('nazwisko')){
+            $result = DB::select('exec searchPatients ?,?',['Nazwisko', $request->last_name]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('telefon')){
+            $result = DB::select('exec searchPatients ?,?',['Tel', $request->phone_number]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('pesel')){
+            $result = DB::select('exec searchPatients ?,?',['PESEL', $request->PESEL]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+
+        if ($request->has('waga')){
+            $result = DB::select('exec searchPatients ?,?',['Waga', $request->weight]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('wzrost')){
+            $result = DB::select('exec searchPatients ?,?',['Wzrost', $request->height]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('doktor')){
+            $result = DB::select('exec searchPatients ?,?',['Doktor', $request->doctor]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+
+        if ($request->has('wojewodztwo')){
+            $result = DB::select('exec searchPatients ?,?',['Wojewodztwo', $request->voivodeship]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('miasto')){
+            $result = DB::select('exec searchPatients ?,?',['Miasto', $request->city]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+
+        if ($request->has('ulica')){
+            $result = DB::select('exec searchPatients ?,?',['Ulica', $request->street]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('numer')){
+            $result = DB::select('exec searchPatients ?,?',['Numer', $request->house_number]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        if ($request->has('mieszkania')){
+            $result = DB::select('exec searchPatients ?,?',['NumerMieszkania', $request->flat_number]);
+            $temp = [];
+            foreach ($result as $r) {
+                // Create a new Patient model for each result
+                $patient = Patient::where('id', $r->id)->first();
+                // Load the patient's doctor and address
+                $patient->load('doctor', 'address');
+                // Store each patient in the results array
+                $temp[$patient->id] = $patient;
+            }
+            // Push to results array
+            $results[] = $temp;
+        }
+        // Find common patients
+        $patients = collect($results[0]);
+        for ($i=1; $i<count($results); $i++) {
+            $patients = $patients->intersectByKeys(collect($results[$i]));
+        }
+        $perPage = 15; // You can change this value as per your requirement.
+        $currentPage = Paginator::resolveCurrentPage() ?: 1;
+        $items = $patients->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedItems = new LengthAwarePaginator($items, $patients->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
+        return view('patient.index', ['patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
+        //return $patients;
+
+
+
+
+        /*$input = $request->get('filter');
         // Split the input into separate condition-value pairs
         $pairs = explode(";", $input);
         $conditions = [];
@@ -156,7 +347,8 @@ class PatientController extends Controller
         $currentPage = Paginator::resolveCurrentPage() ?: 1;
         $items = $patients->slice(($currentPage - 1) * $perPage, $perPage)->values();
         $paginatedItems = new LengthAwarePaginator($items, $patients->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
-        return view('patient.index', ['patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
+        return view('patient.index', ['patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);*/
+        //return $request;
     }
 
 

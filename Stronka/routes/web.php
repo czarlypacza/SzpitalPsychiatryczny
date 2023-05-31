@@ -48,6 +48,7 @@ Route::resource('address',AddressController::class);
 
 Route::resource('patients',PatientController::class)->except('show');
 
+
 Route::get('/filterPatients', [PatientController::class,'filterPatients'])->name('filterPatients');
 
 Route::get('/filterWards', [WardController::class,'filterWards'])->name('filterWards');

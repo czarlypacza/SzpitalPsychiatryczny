@@ -8,13 +8,13 @@
     <title>Szpital psychiatryczny</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
 @include('shared/admin_nav')
 <div class="container mb-5">
     <h2>Pacjeci</h2>
+
     <form action="{{route('filterPatients')}}" method="get">
         <div class="input-group mb-3">
             <input name="filter" type="text" class="form-control" aria-label="email"
@@ -24,6 +24,167 @@
             </button>
         </div>
     </form>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                    Filtracja
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form action="{{route('filterPatients')}}" method="get">
+                        @csrf
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" name="imie" id="imie" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter1">Imie</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Dummy Value 1">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" name="nazwisko" id="nazwisko" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter2">Nazwisko</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Dummy Value 2">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="telefon" name="telefon" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Telefon</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+{{--                        --}}
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="pesel" name="pesel" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">PESEL</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="PESEL" id="PESEL" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="waga" name="waga" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Waga</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="weight" id="weight" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="wzrost" name="wzrost" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Wzrost</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="doktor" name="doktor" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Doktor</label>
+                            </div>
+                            <div class="col-8">
+{{--                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">--}}
+                                <select class="form-select" name="doctor" id="doctor">
+                                    @foreach($doctors as $doctor)
+                                        <option value="{{$doctor->id}}">{{$doctor->first_name}} {{$doctor->last_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="wojewodztwo" name="wojewodztwo" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Wojewodztwo</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="voivodeship" id="voivodeship" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="miasto" name="miasto" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Miasto</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="city" id="city" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="ulica" name="ulica" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Ulica</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="street" id="street" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="numer" name="numer" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Numer domu</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="house_number" id="house_number" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="mieszkania" name="mieszkania" value="value3">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Numer mieszkania</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="flat_number" id="flat_number" placeholder="Dummy Value 3">
+                            </div>
+                        </div>
+                        <div class="row inline-flex justify-content-evenly mt-3">
+                        <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">
+                            Filtruj
+                        </button>
+                            <a class="btn btn-outline-info" href="{{route('patients.index')}}"> Wyczysc</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <table class="table-striped table">
         <thead>
