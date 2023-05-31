@@ -15,15 +15,6 @@
 <div class="container mb-5">
     <h2>Pacjeci</h2>
 
-    <form action="{{route('filterPatients')}}" method="get">
-        <div class="input-group mb-3">
-            <input name="filter" type="text" class="form-control" aria-label="email"
-                   aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                Filtruj
-            </button>
-        </div>
-    </form>
 
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -32,7 +23,7 @@
                     Filtracja
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form action="{{route('filterPatients')}}" method="get">
                         @csrf
@@ -44,7 +35,7 @@
                                 <label class="form-check-label" for="filter1">Imie</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Dummy Value 1">
+                                <input type="text" class="form-control" name="first_name" id="first_name" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
@@ -55,57 +46,57 @@
                                 <label class="form-check-label" for="filter2">Nazwisko</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Dummy Value 2">
+                                <input type="text" class="form-control" id="last_name" name="last_name" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="telefon" name="telefon" value="value3">
+                                <input class="form-check-input " type="checkbox" id="telefon" name="telefon" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Telefon</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="phone_number" id="phone_number" >
                             </div>
                         </div>
 {{--                        --}}
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="pesel" name="pesel" value="value3">
+                                <input class="form-check-input " type="checkbox" id="pesel" name="pesel" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">PESEL</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="PESEL" id="PESEL" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="PESEL" id="PESEL" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="waga" name="waga" value="value3">
+                                <input class="form-check-input " type="checkbox" id="waga" name="waga" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Waga</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="weight" id="weight" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="weight" id="weight" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="wzrost" name="wzrost" value="value3">
+                                <input class="form-check-input " type="checkbox" id="wzrost" name="wzrost" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Wzrost</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="height" id="height" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="doktor" name="doktor" value="value3">
+                                <input class="form-check-input " type="checkbox" id="doktor" name="doktor" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Doktor</label>
@@ -121,57 +112,57 @@
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="wojewodztwo" name="wojewodztwo" value="value3">
+                                <input class="form-check-input " type="checkbox" id="wojewodztwo" name="wojewodztwo" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Wojewodztwo</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="voivodeship" id="voivodeship" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="voivodeship" id="voivodeship" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="miasto" name="miasto" value="value3">
+                                <input class="form-check-input " type="checkbox" id="miasto" name="miasto" v>
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Miasto</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="city" id="city" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="city" id="city" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="ulica" name="ulica" value="value3">
+                                <input class="form-check-input " type="checkbox" id="ulica" name="ulica" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Ulica</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="street" id="street" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="street" id="street" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="numer" name="numer" value="value3">
+                                <input class="form-check-input " type="checkbox" id="numer" name="numer" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Numer domu</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="house_number" id="house_number" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="house_number" id="house_number" >
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
-                                <input class="form-check-input " type="checkbox" id="mieszkania" name="mieszkania" value="value3">
+                                <input class="form-check-input " type="checkbox" id="mieszkania" name="mieszkania" >
                             </div>
                             <div class="col-3">
                                 <label class="form-check-label" for="filter3">Numer mieszkania</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="flat_number" id="flat_number" placeholder="Dummy Value 3">
+                                <input type="text" class="form-control" name="flat_number" id="flat_number" >
                             </div>
                         </div>
                         <div class="row inline-flex justify-content-evenly mt-3">
@@ -557,8 +548,12 @@
     <div class="d-flex justify-content-center mb-2">
         {{ $patients->links() }}
     </div>
-    <form action="{{route('exportPatients')}}" method="get" class="d-flex justify-content-center mb-2">
-        <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
+    <form action="{{ route('exportPatients') }}" method="post" class="d-flex justify-content-center mb-2">
+        @csrf
+        @foreach($Patients as $patient)
+            <input name="{{$patient->id}}" type="text" class="form-control" hidden value="{{$patient->id}}">
+        @endforeach
+    <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 </div>
 

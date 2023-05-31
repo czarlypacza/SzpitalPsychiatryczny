@@ -73,7 +73,7 @@ Route::get('/export/Doctors', [ExportController::class,'exportDoctors'])->name('
 
 Route::get('/export/Wards', [ExportController::class,'exportWards'])->name('exportWards');
 
-Route::get('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
+Route::post('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 

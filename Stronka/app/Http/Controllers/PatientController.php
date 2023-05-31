@@ -17,7 +17,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return view('patient.index', ['patients' => Patient::paginate(15),'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
+        return view('patient.index', ['Patients'=>Patient::all(),'patients' => Patient::paginate(15),'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
     }
 
     /**
@@ -291,6 +291,9 @@ class PatientController extends Controller
             // Push to results array
             $results[] = $temp;
         }
+        if ($results == []){
+            return redirect()->route('patients.index')->with('error','Brak wynikÓw');
+        }
         // Find common patients
         $patients = collect($results[0]);
         for ($i=1; $i<count($results); $i++) {
@@ -300,7 +303,7 @@ class PatientController extends Controller
         $currentPage = Paginator::resolveCurrentPage() ?: 1;
         $items = $patients->slice(($currentPage - 1) * $perPage, $perPage)->values();
         $paginatedItems = new LengthAwarePaginator($items, $patients->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
-        return view('patient.index', ['patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
+        return view('patient.index', ['Patients'=>$patients,'patients' => $paginatedItems ,'illnesses'=>Illness::all(),'doctors'=>Doctor::all()]);
         //return $patients;
 
 

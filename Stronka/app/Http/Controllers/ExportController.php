@@ -45,12 +45,19 @@ class ExportController extends Controller
         $csvExporter = new Export();
         $csvExporter->build($data, ['id', 'ward_name'])->download();
     }
-    public function exportPatients() {
-        $data = DB::select('EXEC ExportData ?',['patients']);
-
-        $data= collect($data);
+    public function exportPatients(Request $request) {
+        $data = $request->all();
+        array_shift($data);
+        $patients = [];
+        foreach ($data as $key => $value){
+            //$patients = Patient::where('id',$value)->get();
+            array_push($patients ,Patient::where('id',$value)->first());
+        }
+        //return $patients;
+        $patients= collect($patients);
 
         $csvExporter = new Export();
-        $csvExporter->build($data, ['id','first_name','last_name','age','phone_number','pesel','weight','height','doctor_id','address_id','created_at', 'updated_at'])->download();
+        $csvExporter->build($patients, ['id','first_name','last_name','age','phone_number','pesel','weight','height','doctor_id','address_id','created_at', 'updated_at'])->download();
+
     }
 }
