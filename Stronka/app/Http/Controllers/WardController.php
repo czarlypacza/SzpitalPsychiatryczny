@@ -75,33 +75,57 @@ class WardController extends Controller
 
     public function filterWards(Request $request)
     {
-        $input = $request->get('filter');
-
-        // Split the input into separate ward names
-        $names = explode(",", $input);
-
-        $wards = collect();
-
-        // Iterate over each name
-        foreach ($names as $name) {
-            // Execute the stored procedure for each name
-            $results = DB::select('exec searchWards ?', [trim($name)]);
-
-            // Map over the results to create new Eloquent models
-            foreach ($results as $result) {
-                // Create a new Ward model for each result
-                $ward = Ward::where('id', $result->id)->first();
-
-                // Push the ward to the wards collection
-                $wards->push($ward);
-            }
+        $wards=[];
+        if ($request->has('oddzial')){
+            $wards = Ward::where('ward_name', $request->input('ward_name'))->get();
         }
-        return view('admin/wards', [
-            'wards' => $wards,
-            'illnesses'=>Illness::all(),
-            'doctors'=>Doctor::all(),
-            'patients'=>Patient::all()
-        ]);
+
+        if ($wards == []){
+            return view('admin/wards', [
+                'wards' => Ward::all(),
+                'illnesses'=>Illness::all(),
+                'doctors'=>Doctor::all(),
+                'patients'=>Patient::all()
+            ]);
+        }else{
+            return view('admin/wards', [
+                'wards' => $wards,
+                'illnesses'=>Illness::all(),
+                'doctors'=>Doctor::all(),
+                'patients'=>Patient::all()
+            ]);
+        }
+
+
+
+
+//        $input = $request->get('filter');
+//
+//        // Split the input into separate ward names
+//        $names = explode(",", $input);
+//
+//        $wards = collect();
+//
+//        // Iterate over each name
+//        foreach ($names as $name) {
+//            // Execute the stored procedure for each name
+//            $results = DB::select('exec searchWards ?', [trim($name)]);
+//
+//            // Map over the results to create new Eloquent models
+//            foreach ($results as $result) {
+//                // Create a new Ward model for each result
+//                $ward = Ward::where('id', $result->id)->first();
+//
+//                // Push the ward to the wards collection
+//                $wards->push($ward);
+//            }
+//        }
+//        return view('admin/wards', [
+//            'wards' => $wards,
+//            'illnesses'=>Illness::all(),
+//            'doctors'=>Doctor::all(),
+//            'patients'=>Patient::all()
+//        ]);
 
     }
 

@@ -10,3 +10,19 @@ BEGIN
 	SET ward_name = @NAME
 	WHERE id = @ID;
 END
+-- mysql
+DELIMITER //
+
+CREATE PROCEDURE updateWard(IN ID INT, IN NAME VARCHAR(60))
+BEGIN
+    DECLARE count INT;
+    SELECT COUNT(id) INTO count FROM wards WHERE ward_name = NAME;
+    IF count = 0 THEN
+        UPDATE wards
+        SET ward_name = NAME
+        WHERE id = ID;
+    END IF;
+END //
+
+DELIMITER ;
+

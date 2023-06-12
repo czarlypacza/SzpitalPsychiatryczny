@@ -11,14 +11,14 @@ INSERT INTO patients ( first_name, last_name, age, phone_number, pesel, weight, 
 go
 
 -- mysql
--- DELIMITER //
--- CREATE PROCEDURE addPatient(IN first_name varchar(20), IN last_name varchar(30), IN age int, IN phone_number varchar(20), IN pesel bigint, IN weight smallint, IN height smallint, IN doctor_id bigint, IN voivodeship varchar(30), IN city varchar(30), IN street varchar(30), IN house_number int, IN flat_number int, IN postal_code varchar(15))
--- BEGIN
---     DECLARE address_id INT;
---     CALL addAddress(voivodeship, city, street, house_number, flat_number, postal_code);
---
---   SELECT id INTO address_id FROM addresses WHERE voivodeship = voivodeship AND city = city AND street = street AND house_number = house_number AND flat_number = flat_number AND postal_code = postal_code;
---
---   INSERT INTO patients (first_name, last_name, age, phone_number, pesel, weight, height, doctor_id, address_id) VALUES (first_name, last_name, age, phone_number, pesel, weight, height, doctor_id, address_id);
--- END //
--- DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE addPatient(IN first_name varchar(20), IN last_name varchar(30), IN age int, IN phone_number varchar(20), IN pesel bigint, IN weight smallint, IN height smallint, IN doctor_id bigint, IN voivodeship varchar(30), IN city varchar(30), IN street varchar(30), IN house_number int, IN flat_number int, IN postal_code varchar(15))
+BEGIN
+    DECLARE address_id INT;
+    CALL addAddress(voivodeship, city, street, house_number, flat_number, postal_code);
+
+  SELECT id INTO address_id FROM addresses WHERE voivodeship = voivodeship AND city = city AND street = street AND house_number = house_number AND flat_number = flat_number AND postal_code = postal_code;
+
+  INSERT INTO patients (first_name, last_name, age, phone_number, pesel, weight, height, doctor_id, address_id) VALUES (first_name, last_name, age, phone_number, pesel, weight, height, doctor_id, address_id);
+END //
+DELIMITER ;

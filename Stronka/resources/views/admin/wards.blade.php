@@ -19,18 +19,44 @@
 
 <div class="container mb-3">
     <h2>Oddziały</h2>
-    <form action="{{route('filterWards')}}" method="get">
-        <div class="input-group mb-3">
-            <input name="filter" type="text" class="form-control" aria-label="email"
-                   aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                Filtruj
-            </button>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                    Filtracja
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form action="{{route('filterWards')}}" method="get">
+                        @csrf
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="oddzial" name="oddzial" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Oddział</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="ward_name" id="ward_name" >
+                            </div>
+                        </div>
+                        <div class="row inline-flex justify-content-evenly mt-3">
+                            <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">
+                                Filtruj
+                            </button>
+                            <a class="btn btn-outline-info" href="{{route('wards.index')}}"> Wyczysc</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+
+
     <div class="accordion accordion-flush" id="accordionFlushExample">
 
-
+        @if(count($wards)>0)
         @foreach ($wards as $ward)
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingOne">
@@ -433,6 +459,7 @@
                 </div>
             </div>
         @endforeach
+
         <div class="modal fade" id="EditWard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -458,7 +485,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <div class="container mb-4 mt-2">
             <div class="row justify-content-center">
                 <div class="col-4 text-center">

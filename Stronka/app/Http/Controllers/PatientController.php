@@ -96,9 +96,9 @@ class PatientController extends Controller
             'doctor_id'=>'required',
         ]);
 
-        DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        //DB::insert('exec updatePatient ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
-        //DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
+        DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
 
         return redirect()->route('patients.index');
@@ -115,12 +115,10 @@ class PatientController extends Controller
 
     public function filterPatients(Request $request)
     {
-
-
         $results = [];
 
         if ($request->has('imie')){
-            $result = DB::select('exec searchPatients ?,?',['Imie', $request->first_name]);
+            $result = DB::select('call searchPatients (?,?)',['Imie', $request->first_name]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -135,7 +133,7 @@ class PatientController extends Controller
         }
 
         if ($request->has('nazwisko')){
-            $result = DB::select('exec searchPatients ?,?',['Nazwisko', $request->last_name]);
+            $result = DB::select('call searchPatients (?,?)',['Nazwisko', $request->last_name]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -149,7 +147,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('telefon')){
-            $result = DB::select('exec searchPatients ?,?',['Tel', $request->phone_number]);
+            $result = DB::select('call searchPatients (?,?)',['Tel', $request->phone_number]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -163,7 +161,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('pesel')){
-            $result = DB::select('exec searchPatients ?,?',['PESEL', $request->PESEL]);
+            $result = DB::select('call searchPatients (?,?)',['PESEL', $request->PESEL]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -178,7 +176,7 @@ class PatientController extends Controller
         }
 
         if ($request->has('waga')){
-            $result = DB::select('exec searchPatients ?,?',['Waga', $request->weight]);
+            $result = DB::select('call searchPatients (?,?)',['Waga', $request->weight]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -192,7 +190,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('wzrost')){
-            $result = DB::select('exec searchPatients ?,?',['Wzrost', $request->height]);
+            $result = DB::select('call searchPatients (?,?)',['Wzrost', $request->height]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -206,7 +204,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('doktor')){
-            $result = DB::select('exec searchPatients ?,?',['Doktor', $request->doctor]);
+            $result = DB::select('call searchPatients (?,?)',['Doktor', $request->doctor]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -221,7 +219,7 @@ class PatientController extends Controller
         }
 
         if ($request->has('wojewodztwo')){
-            $result = DB::select('exec searchPatients ?,?',['Wojewodztwo', $request->voivodeship]);
+            $result = DB::select('call searchPatients (?,?)',['Wojewodztwo', $request->voivodeship]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -235,7 +233,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('miasto')){
-            $result = DB::select('exec searchPatients ?,?',['Miasto', $request->city]);
+            $result = DB::select('call searchPatients (?,?)',['Miasto', $request->city]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -250,7 +248,7 @@ class PatientController extends Controller
         }
 
         if ($request->has('ulica')){
-            $result = DB::select('exec searchPatients ?,?',['Ulica', $request->street]);
+            $result = DB::select('call searchPatients (?,?)',['Ulica', $request->street]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -264,7 +262,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('numer')){
-            $result = DB::select('exec searchPatients ?,?',['Numer', $request->house_number]);
+            $result = DB::select('call searchPatients (?,?)',['Numer', $request->house_number]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result
@@ -278,7 +276,7 @@ class PatientController extends Controller
             $results[] = $temp;
         }
         if ($request->has('mieszkania')){
-            $result = DB::select('exec searchPatients ?,?',['NumerMieszkania', $request->flat_number]);
+            $result = DB::select('call searchPatients (?,?)',['NumerMieszkania', $request->flat_number]);
             $temp = [];
             foreach ($result as $r) {
                 // Create a new Patient model for each result

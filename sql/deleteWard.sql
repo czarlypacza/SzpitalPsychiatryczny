@@ -5,9 +5,9 @@ WHERE id = @ID;
 
 
 -- mysql
--- DELIMITER //
--- CREATE PROCEDURE deleteWard(IN id INT)
--- BEGIN
---   DELETE FROM wards WHERE id = id;
--- END //
--- DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE deleteWard(IN id INT)
+BEGIN
+  DELETE FROM wards WHERE id = id;
+END //
+DELIMITER ;
