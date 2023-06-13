@@ -46,7 +46,7 @@ class PatientController extends Controller
             'street'=>'required',
             'house_number'=>'required',
             'flat_number'=>'required',
-            'postcode'=>'required',
+            'postal_code'=>'required',
             'doctor_id'=>'required',
         ]);
 

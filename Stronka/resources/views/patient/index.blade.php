@@ -272,12 +272,11 @@
                 <button type="button" class="btn btn-sm btn-primary editDoctorBtn" data-bs-toggle="modal"
                         data-bs-target="#ModalEditPatients{{ $patient->id }}"> Edytuj
                 </button>
-                <form action="{{route('destroy_illness_patient', ['patient' => $patient->id, 'illness' => $illness->id]) }}" method="POST" id="delete-form">
+                <form action="{{route('patients.destroy', ['patient' => $patient->id]) }}" method="POST" id="delete-form">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Czy na pewno usunąć wpis?')">Usuń</button>
                 </form>
-
             </td>
 
             <div class="modal fade" id="ModalEditPatients{{$patient->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
