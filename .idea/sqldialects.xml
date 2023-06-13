@@ -8,7 +8,11 @@
     <file url="file://$PROJECT_DIR$/sql/addPatient.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/addWard.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/deleteWard.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/importAddress.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/importDoctor.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/importIllness.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/importPatient.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/importWard.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/searchAddresses.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/searchDoctors.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/searchIllnesses.sql" dialect="MariaDB" />

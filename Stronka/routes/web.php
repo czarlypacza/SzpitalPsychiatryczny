@@ -76,7 +76,15 @@ Route::get('/export/Wards', [ExportController::class,'exportWards'])->name('expo
 
 Route::post('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
 
-Route::post('/patients/import', [ImportController::class, 'importPatients'])->name('importPatients');
+Route::post('/import/Patients', [ImportController::class, 'importPatients'])->name('importPatients');
+
+Route::post('/import/Illnesses', [ImportController::class, 'importIllnesses'])->name('importIllnesses');
+
+Route::post('/import/Wards', [ImportController::class, 'importWards'])->name('importWards');
+
+Route::post('/import/Doctors', [ImportController::class, 'importDoctors'])->name('importDoctors');
+
+Route::post('/import/Addresses', [ImportController::class, 'importAddresses'])->name('importAddresses');
 
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);

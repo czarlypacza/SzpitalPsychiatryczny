@@ -528,6 +528,12 @@
         <form action="{{route('exportWards')}}" method="get" class="d-flex justify-content-center mb-2">
             <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
         </form>
+
+        <form action="{{ route('importWards') }}" method="post" enctype="multipart/form-data" class="d-flex justify-content-center mb-2">
+            @csrf
+            <input type="file" name="csv_file" class="form-control-file">
+            <button class="btn btn-sm btn-primary" type="submit">Import CSV</button>
+        </form>
     </div>
 </div>
 

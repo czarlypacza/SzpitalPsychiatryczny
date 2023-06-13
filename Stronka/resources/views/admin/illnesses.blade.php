@@ -114,6 +114,12 @@
     <form action="{{route('exportIllnesses')}}" method="get" class="d-flex justify-content-center mb-4">
         <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
+
+    <form action="{{ route('importIllnesses') }}" method="post" enctype="multipart/form-data" class="d-flex justify-content-center mb-2">
+        @csrf
+        <input type="file" name="csv_file" class="form-control-file">
+        <button class="btn btn-sm btn-primary" type="submit">Import CSV</button>
+    </form>
 </div>
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 <script>
