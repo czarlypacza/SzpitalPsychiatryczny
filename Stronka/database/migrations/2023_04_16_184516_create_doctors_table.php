@@ -18,8 +18,8 @@ return new class extends Migration
                 $table->string('last_name',40);
                 $table->string('specialization',150)->nullable();
                 $table->string('phone_number',15)->nullable();
-                $table->foreignIdFor(\App\Models\Ward::class)->onDelete('cascade')->nullable();
-                $table->timestamps();
+                $table->foreignIdFor(\App\Models\Ward::class)->constrained()->onDelete('cascade')->nullable();
+                // $table->timestamps();
             });
         }
     }

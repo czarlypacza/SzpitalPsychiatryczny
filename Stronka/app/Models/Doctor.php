@@ -23,4 +23,6 @@ class Doctor extends Model
     public function patients():HasMany{
         return $this->hasMany(Patient::class);
     }
+
+    public $timestamps = false;
 }

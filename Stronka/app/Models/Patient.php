@@ -27,4 +27,5 @@ class Patient extends Model
         return $this->belongsToMany(Illness::class);
     }
 
+    public $timestamps = false;
 }

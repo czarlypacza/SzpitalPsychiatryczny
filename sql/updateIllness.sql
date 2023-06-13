@@ -4,7 +4,7 @@ CREATE OR ALTER PROCEDURE updateIllness @ID int,
 ),
 @DESCRIPTION VARCHAR(
     150
-) AS 
+) AS
 
 UPDATE illnesses
 SET name = @NAME, description = @DESCRIPTION
@@ -16,7 +16,7 @@ DELIMITER //
     BEGIN
         UPDATE illnesses
         SET name = NAME, description = DESCRIPTION
-        WHERE id = ID;
+        WHERE ID = id;
     END //
 
 DELIMITER ;

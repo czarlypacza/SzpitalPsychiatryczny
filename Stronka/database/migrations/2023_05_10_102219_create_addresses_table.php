@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('house_number');
             $table->integer('flat_number')->nullable();
             $table->string('postal_code');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

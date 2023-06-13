@@ -554,6 +554,12 @@
         @endforeach
     <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
+
+    <form action="{{ route('importPatients') }}" method="post" enctype="multipart/form-data" class="d-flex justify-content-center mb-2">
+        @csrf
+        <input type="file" name="csv_file" class="form-control-file">
+        <button class="btn btn-sm btn-primary" type="submit">Import CSV</button>
+    </form>
 </div>
 
 

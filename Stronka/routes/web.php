@@ -10,6 +10,7 @@ use App\Http\Controllers\AddressController;
 use App\Models\Illness;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,9 @@ Route::get('/export/Doctors', [ExportController::class,'exportDoctors'])->name('
 Route::get('/export/Wards', [ExportController::class,'exportWards'])->name('exportWards');
 
 Route::post('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
+
+Route::post('/patients/import', [ImportController::class, 'importPatients'])->name('importPatients');
+
 
 // Route::post('/admin/storeIllness',[IllnessController::class,'store']);
 

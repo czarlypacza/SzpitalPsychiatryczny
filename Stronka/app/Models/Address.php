@@ -17,4 +17,5 @@ class Address extends Model
         return $this->hasMany(Patient::class);
     }
 
+    public $timestamps = false;
 }

@@ -24,9 +24,9 @@ return new class extends Migration
                 $table->bigInteger('pesel')->nullable();
                 $table->smallInteger('weight')->nullable();
                 $table->smallInteger('height')->nullable();
-                $table->foreignIdFor(Doctor::class)->onDelete('cascade')->nullable();
-                $table->foreignIdFor(Address::class)->onDelete('cascade')->nullable();
-                $table->timestamps();
+                $table->foreignIdFor(Doctor::class)->constrained()->onDelete('cascade')->nullable();
+                $table->foreignIdFor(Address::class)->constrained()->onDelete('cascade')->nullable();
+                // $table->timestamps();
             });
         }
     }

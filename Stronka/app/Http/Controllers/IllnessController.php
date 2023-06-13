@@ -55,8 +55,7 @@ class IllnessController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        DB::update('call updateIllness ?, ?, ?', [$request->input('id'), $request->input('name'), $request->input('description')]);
-
+        DB::update('call updateIllness(?, ?, ?)', [$request->input('id'), $request->input('name'), $request->input('description')]);
 
         return redirect('illnesses');
     }
