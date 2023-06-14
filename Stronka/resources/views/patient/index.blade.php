@@ -23,7 +23,7 @@
                     Filtracja
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form action="{{route('filterPatients')}}" method="get">
                         @csrf
@@ -96,6 +96,22 @@
                         </div>
                         <div class="row align-items-center mt-2">
                             <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="oddzial" name="oddzial" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Oddzial</label>
+                            </div>
+                            <div class="col-8">
+                                {{--                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">--}}
+                                <select class="form-select" name="ward_id" id="ward_id">
+                                    @foreach($wards as $ward)
+                                        <option value="{{$ward->id}}">{{$ward->ward_name}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
                                 <input class="form-check-input " type="checkbox" id="doktor" name="doktor" >
                             </div>
                             <div class="col-3">
@@ -118,7 +134,25 @@
                                 <label class="form-check-label" for="filter3">Wojewodztwo</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control" name="voivodeship" id="voivodeship" >
+                                {{--                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">--}}
+                                <select class="form-select" name="voivodeship" id="voivodeship">
+                                    <option value="Dolnośląskie">Dolnośląskie</option>
+                                    <option value="Kujawsko-pomorskie">Kujawsko-Pomorskie</option>
+                                    <option value="Lubelskie">Lubelskie</option>
+                                    <option value="lubuskie">Lubuskie</option>
+                                    <option value="łódzkie">Łódzkie</option>
+                                    <option value="małopolskie">Małopolskie</option>
+                                    <option value="mazowieckie">Mazowieckie</option>
+                                    <option value="opolskie">Opolskie</option>
+                                    <option value="podkarpackie">Podkarpackie</option>
+                                    <option value="podlaskie">Podlaskie</option>
+                                    <option value="pomorskie">Pomorskie</option>
+                                    <option value="śląskie">Śląskie</option>
+                                    <option value="świętokrzyskie">Świętokrzyskie</option>
+                                    <option value="warmińsko-mazurskie">Warmińsko-Mazurskie</option>
+                                    <option value="wielkopolskie">Wielkopolskie</option>
+                                    <option value="zachodniopomorskie">Zachodniopomorskie</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
@@ -320,9 +354,9 @@
                                     <div class="input-group mb-3">
                                         {{--TODO: zrobic ze jak sie pojawia modal edycji to jest ustawiana wartosc wojewodztwa--}}
                                         <select name="voivodeship" class="form-select" aria-label="Województwo">
-                                            <option value="dolnośląskie">Dolnośląskie</option>
-                                            <option value="kujawsko-pomorskie">Kujawsko-Pomorskie</option>
-                                            <option value="lubelskie">Lubelskie</option>
+                                            <option value="Dolnośląskie">Dolnośląskie</option>
+                                            <option value="Kujawsko-pomorskie">Kujawsko-Pomorskie</option>
+                                            <option value="Lubelskie">Lubelskie</option>
                                             <option value="lubuskie">Lubuskie</option>
                                             <option value="łódzkie">Łódzkie</option>
                                             <option value="małopolskie">Małopolskie</option>

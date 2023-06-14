@@ -38,3 +38,16 @@ BEGIN
   END IF;
 END //
 DELIMITER ;
+-- lokalna moja
+
+create
+    definer = root@localhost procedure addIllness(IN in_name varchar(60), IN in_description varchar(150))
+BEGIN
+    DECLARE count INT;
+    SELECT COUNT(id) INTO count FROM illnesses WHERE name = in_name;
+
+    IF count = 0 THEN
+        INSERT INTO ILLNESSES (name, description) VALUES (in_name, in_description);
+    END IF;
+END;
+

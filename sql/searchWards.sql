@@ -15,3 +15,9 @@ END //
 
 DELIMITER ;
 
+create
+    definer = root@localhost procedure searchWards(IN value varchar(50))
+BEGIN
+    SELECT * FROM wards WHERE ward_name = value;
+END;
+

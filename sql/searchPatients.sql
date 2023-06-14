@@ -123,3 +123,46 @@ END CASE;
 END //
 
 DELIMITER ;
+
+
+
+
+create
+    definer = root@localhost procedure searchPatients(IN cond varchar(50), IN value varchar(50))
+BEGIN
+    CASE
+        WHEN cond = 'Imie' THEN SELECT * FROM Patients WHERE first_name = value;
+        WHEN cond = 'Nazwisko' THEN SELECT * FROM Patients WHERE last_name = value;
+        WHEN cond = 'Wiek' THEN SELECT * FROM Patients WHERE age = value;
+        WHEN cond = 'Tel' THEN SELECT * FROM Patients WHERE phone_number = value;
+        WHEN cond = 'PESEL' THEN SELECT * FROM Patients WHERE pesel = value;
+        WHEN cond = 'Waga' THEN SELECT * FROM Patients WHERE weight = value;
+        WHEN cond = 'Wzrost' THEN SELECT * FROM Patients WHERE height = value;
+        WHEN cond = 'Doktor' THEN SELECT * FROM Patients WHERE doctor_id = value;
+        WHEN cond = 'Oddzial' THEN SELECT p.*
+                                   FROM patients p
+                                            INNER JOIN Doctors d ON p.doctor_id = d.id
+                                   WHERE d.ward_id = value;
+        WHEN cond = 'Wojewodztwo' THEN SELECT p.*
+                                       FROM Patients p
+                                                INNER JOIN Addresses a ON p.address_id = a.id
+                                       WHERE a.voivodeship = value;
+        WHEN cond = 'Miasto' THEN SELECT p.*
+                                  FROM Patients p
+                                           INNER JOIN Addresses a ON p.address_id = a.id
+                                  WHERE a.city = value;
+        WHEN cond = 'Ulica' THEN SELECT p.*
+                                 FROM Patients p
+                                          INNER JOIN Addresses a ON p.address_id = a.id
+                                 WHERE a.street = value;
+        WHEN cond = 'Numer' THEN SELECT p.*
+                                 FROM Patients p
+                                          INNER JOIN Addresses a ON p.address_id = a.id
+                                 WHERE a.house_number = value;
+        WHEN cond = 'NumerMieszkania' THEN SELECT p.*
+                                           FROM Patients p
+                                                    INNER JOIN Addresses a ON p.address_id = a.id
+                                           WHERE a.flat_number = value;
+        END CASE;
+END;
+

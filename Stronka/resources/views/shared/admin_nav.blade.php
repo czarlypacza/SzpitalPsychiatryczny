@@ -25,12 +25,7 @@
                 <li class="nav-item">
                     <a href="{{route('address.index')}}" class="nav-link">Adresy</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('login')}}" class="nav-link">Konto</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#Login" class="nav-link">Wyloguj</a>
-                </li>
+
             </ul>
         </div>
     </div>

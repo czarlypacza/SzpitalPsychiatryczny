@@ -23,3 +23,18 @@ BEGIN
     END IF;
 END;
 
+-- lokalna moja
+create
+    definer = root@localhost procedure addAddress(IN voivodeship varchar(30), IN city varchar(30),
+                                                  IN street varchar(30), IN house_number int, IN flat_number int,
+                                                  IN postal_code varchar(15))
+BEGIN
+    DECLARE count INT;
+    SELECT COUNT(*) INTO count FROM addresses a WHERE a.voivodeship = voivodeship AND a.city = city AND a.street = street AND a.house_number = house_number AND a.flat_number = flat_number AND a.postal_code = postal_code;
+
+    IF count = 0 THEN
+        INSERT INTO addresses (voivodeship, city, street, house_number, flat_number, postal_code) VALUES (voivodeship, city, street, house_number, flat_number, postal_code);
+    END IF;
+END;
+
+

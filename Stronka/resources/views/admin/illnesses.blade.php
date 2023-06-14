@@ -17,15 +17,50 @@
 
 <div class="container">
     <h2>Choroby</h2>
-    <form action="{{route('filterIllnesses')}}" method="get">
-        <div class="input-group mb-3">
-            <input name="filter" type="text" class="form-control" aria-label="email"
-                   aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                Filtruj
-            </button>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                    Filtracja
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form action="{{route('filterIllnesses')}}" method="get">
+                        @csrf
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="nazwa" name="nazwa" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Nazwa</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="name" id="name" >
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="opis" name="opis" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Opis</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="description" id="description" >
+                            </div>
+                        </div>
+                        <div class="row inline-flex justify-content-evenly mt-3">
+                            <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">
+                                Filtruj
+                            </button>
+                            <a class="btn btn-outline-info" href="{{route('illnesses.index')}}"> Wyczysc</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
     <table class="table-striped table">
         <thead>
             <tr>
@@ -40,7 +75,32 @@
                 <td>{{$illness->name}}</td>
                 <td>{{$illness->description}}</td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $illness->id }}" data-name="{{ $illness->name }}" data-description="{{ $illness->description }}">Edytuj</button>
+                    <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal{{$illness->id}}" data-id="{{ $illness->id }}" data-name="{{ $illness->name }}" data-description="{{ $illness->description }}">Edytuj</button>
+                    <div class="modal fade" id="editModal{{$illness->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edytuj Chorobę</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form id="editForm" action="{{ route('illnesses.update',['illness'=>$illness]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" id="illnessId">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-3" name="name" id="illnessName" placeholder="Nazwa" aria-label="Nazwa">
+                                            <textarea class="form-control mb-3" rows="3" name="description" id="illnessDescription" placeholder="Opis"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="saveButton">Zapisz zmiany</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <form action="{{ route('illnesses.destroy', ['illness' => $illness]) }}" method="POST" id="delete-form">
                         @csrf
                         @method('DELETE')
@@ -79,31 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edytuj Chorobę</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form id="editForm" action="{{ route('illnesses.update',['illness'=>$illness]) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-body">
-                                        <input type="hidden" name="id" id="illnessId">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control mb-3" name="name" id="illnessName" placeholder="Nazwa" aria-label="Nazwa">
-                                            <textarea class="form-control mb-3" rows="3" name="description" id="illnessDescription" placeholder="Opis"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" id="saveButton">Zapisz zmiany</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
                 </td>
             </tr>
         </tbody>

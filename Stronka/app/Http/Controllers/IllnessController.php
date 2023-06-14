@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Illness;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+
 
 class IllnessController extends Controller
 {
@@ -67,51 +70,47 @@ class IllnessController extends Controller
     }
     public function filterIllnesses(Request $request)
     {
-        $input = $request->get('filter');
-
-        // Split the input into separate condition-value pairs
-        $pairs = explode(";", $input);
-
-        $conditions = [];
-        foreach ($pairs as $pair) {
-            // Split each pair into condition and value
-            $parts = explode(" ", trim($pair), 2);
-
-            if (count($parts) == 2) {
-                // Store each condition and value in an associative array
-                $conditions[trim($parts[0])] = trim($parts[1]);
-            }
-        }
-
         $results = [];
 
-        // Iterate over each condition-value pair
-        foreach ($conditions as $condition => $value) {
-            // Execute the stored procedure for each condition
-            $result = DB::select('exec searchIllnesses ?,?', [$condition, $value]);
-
-            // Map over the results to create new Eloquent models
-            $temp = [];
-            foreach ($result as $r) {
-                // Create a new Doctor model for each result
-                $illness = Illness::where('id', $r->id)->first();
-
-                // Store each doctor in the results array
-                $temp[$illness->id] = $illness;
-            }
-            // Push to results array
+        if ($request->has('nazwa') && $request->input('name')) {
+            $result = DB::select('call searchIllnesses( ?, ?)', ['Nazwa', $request->name]);
+            $temp = $this->mapIllnessResults($result);
             $results[] = $temp;
         }
 
-        // Find common doctors
+        if ($request->has('opis') && $request->input('description')) {
+            $description = '%' . $request->description . '%';
+            $result = DB::select('call searchIllnesses(?, ?)', ['Opis', $description]);
+            $temp = $this->mapIllnessResults($result);
+            $results[] = $temp;
+        }
+
+        // Find common illnesses
         $illnesses = collect($results[0]);
         for ($i = 1; $i < count($results); $i++) {
             $illnesses = $illnesses->intersectByKeys(collect($results[$i]));
         }
 
+        $perPage = 15; // You can change this value as per your requirement.
+        $currentPage = Paginator::resolveCurrentPage() ?: 1;
+        $items = $illnesses->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedItems = new LengthAwarePaginator($items, $illnesses->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
+
         return view('admin/illnesses', [
-            'illnesses' => $illnesses
+            'Illnesses'=>$illnesses,
+            'illnesses' => $paginatedItems
         ]);
     }
+
+    private function mapIllnessResults($result)
+    {
+        $temp = [];
+        foreach ($result as $r) {
+            $illness = Illness::where('id', $r->id)->first();
+            $temp[$illness->id] = $illness;
+        }
+        return $temp;
+    }
+
 
 }

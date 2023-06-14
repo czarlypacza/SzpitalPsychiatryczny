@@ -11,3 +11,12 @@ BEGIN
   DELETE FROM wards WHERE id = id;
 END //
 DELIMITER ;
+
+
+
+create
+    definer = root@localhost procedure deleteWard(IN w_id int)
+BEGIN
+    DELETE FROM wards WHERE id = w_id;
+END;
+

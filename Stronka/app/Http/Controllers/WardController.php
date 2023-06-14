@@ -38,7 +38,7 @@ class WardController extends Controller
         $this->validate($request, [
             'ward_name' => 'required',
         ]);
-        DB::insert('exec addWard ?', [$request->input('ward_name')]);
+        DB::insert('call addWard(?)', [$request->input('ward_name')]);
 
         return redirect('wards');
     }
@@ -63,38 +63,32 @@ class WardController extends Controller
         $this->validate($request, [
             'ward_name' => 'required',
         ]);
-        DB::update('exec updateWard ?, ?', [$request->input('wardId'), $request->input('ward_name')]);
+        DB::update('call updateWard( ?, ?)', [$request->input('wardId'), $request->input('ward_name')]);
 
         return redirect('wards');
     }
     public function destroy(Ward $ward)
     {
-        DB::delete('exec deleteWard ?', [$ward->id]);
+        DB::delete('call deleteWard (?)', [$ward->id]);
         return redirect('wards');
     }
 
     public function filterWards(Request $request)
     {
-        $wards=[];
-        if ($request->has('oddzial')){
-            $wards = Ward::where('ward_name', $request->input('ward_name'))->get();
+        $wards = Ward::all();
+
+        if ($request->has('ward_name')) {
+            $wardNames = explode(',', $request->input('ward_name'));
+            $wardNames = array_map('trim', $wardNames);  // Remove whitespace from the names
+            $wards = Ward::whereIn('ward_name', $wardNames)->get();
         }
 
-        if ($wards == []){
-            return view('admin/wards', [
-                'wards' => Ward::all(),
-                'illnesses'=>Illness::all(),
-                'doctors'=>Doctor::all(),
-                'patients'=>Patient::all()
-            ]);
-        }else{
-            return view('admin/wards', [
-                'wards' => $wards,
-                'illnesses'=>Illness::all(),
-                'doctors'=>Doctor::all(),
-                'patients'=>Patient::all()
-            ]);
-        }
+        return view('admin/wards', [
+            'wards' => $wards,
+            'illnesses'=>Illness::all(),
+            'doctors'=>Doctor::all(),
+            'patients'=>Patient::all()
+        ]);
 
 
 

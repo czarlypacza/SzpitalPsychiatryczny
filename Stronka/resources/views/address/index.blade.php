@@ -16,15 +16,114 @@
 
 <div class="container mb-5">
     <h2>Adresy</h2>
-    <form action="{{route('filterAddresses')}}" method="get">
-        <div class="input-group mb-3">
-            <input name="filter" type="text" class="form-control" aria-label="email"
-                   aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                Filtruj
-            </button>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">
+                    Filtracja
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form action="{{route('filterAddresses')}}" method="get">
+                        @csrf
+
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="wojewodztwo" name="wojewodztwo" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Wojewodztwo</label>
+                            </div>
+                            <div class="col-8">
+                                {{--                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">--}}
+                                <select class="form-select" name="voivodeship" id="voivodeship">
+                                    <option value="Dolnośląskie">Dolnośląskie</option>
+                                    <option value="Kujawsko-pomorskie">Kujawsko-Pomorskie</option>
+                                    <option value="Lubelskie">Lubelskie</option>
+                                    <option value="lubuskie">Lubuskie</option>
+                                    <option value="łódzkie">Łódzkie</option>
+                                    <option value="małopolskie">Małopolskie</option>
+                                    <option value="mazowieckie">Mazowieckie</option>
+                                    <option value="opolskie">Opolskie</option>
+                                    <option value="podkarpackie">Podkarpackie</option>
+                                    <option value="podlaskie">Podlaskie</option>
+                                    <option value="pomorskie">Pomorskie</option>
+                                    <option value="śląskie">Śląskie</option>
+                                    <option value="świętokrzyskie">Świętokrzyskie</option>
+                                    <option value="warmińsko-mazurskie">Warmińsko-Mazurskie</option>
+                                    <option value="wielkopolskie">Wielkopolskie</option>
+                                    <option value="zachodniopomorskie">Zachodniopomorskie</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="miasto" name="miasto" v>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Miasto</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="city" id="city" >
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="ulica" name="ulica" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Ulica</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="street" id="street" >
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="numer" name="numer" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Numer domu</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="house_number" id="house_number" >
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="mieszkania" name="mieszkania" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Numer mieszkania</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="flat_number" id="flat_number" >
+                            </div>
+                        </div>
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="kod_pocztowy" name="kod_pocztowy" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Kod pocztowy</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="postal_code" id="postal_code" >
+                            </div>
+                        </div>
+                        <div class="row inline-flex justify-content-evenly mt-3">
+                            <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">
+                                Filtruj
+                            </button>
+                            <a class="btn btn-outline-info" href="{{route('address.index')}}"> Wyczysc</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
     <table class="table-striped table">
         <thead>
         <tr>

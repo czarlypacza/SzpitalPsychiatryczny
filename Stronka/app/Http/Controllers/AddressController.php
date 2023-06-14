@@ -88,40 +88,37 @@ class AddressController extends Controller
 
     public function filterAddresses(Request $request)
     {
-        $input = $request->get('filter');
-
-        // Split the input into separate condition-value pairs
-        $pairs = explode(";", $input);
-
-        $conditions = [];
-        foreach ($pairs as $pair) {
-            // Split each pair into condition and value
-            $parts = explode(":", trim($pair), 2);
-
-            if (count($parts) == 2) {
-                // Store each condition and value in an associative array
-                $conditions[trim($parts[0])] = trim($parts[1]);
-            }
-        }
-
         $results = [];
 
-        // Iterate over each condition-value pair
-        foreach ($conditions as $condition => $value) {
-            // Execute the stored procedure for each condition
-            $result = DB::select('exec searchAddresses ?,?',[$condition, $value]);
+        if ($request->has('wojewodztwo')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Województwo', $request->voivodeship]);
+            $temp = $this->mapAddressResults($result);
+            $results[] = $temp;
+        }
+        if ($request->has('miasto')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Miasto', $request->city]);
+            $temp = $this->mapAddressResults($result);
+            $results[] = $temp;
+        }
 
-            // Map over the results to create new Eloquent models
-            $temp = [];
-            foreach ($result as $r) {
-                // Create a new Doctor model for each result
-                $address = Address::where('id', $r->id)->first();
-
-
-                // Store each doctor in the results array
-                $temp[$address->id] = $address;
-            }
-            // Push to results array
+        if ($request->has('ulica')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Ulica', $request->street]);
+            $temp = $this->mapAddressResults($result);
+            $results[] = $temp;
+        }
+        if ($request->has('numer')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Nr domu', $request->house_number]);
+            $temp = $this->mapAddressResults($result);
+            $results[] = $temp;
+        }
+        if ($request->has('mieszkania')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Nr mieszkania', $request->flat_number]);
+            $temp = $this->mapAddressResults($result);
+            $results[] = $temp;
+        }
+        if ($request->has('kod')) {
+            $result = DB::select('call searchAddresses( ?, ?)', ['Kod pocztowy', $request->postal_code]);
+            $temp = $this->mapAddressResults($result);
             $results[] = $temp;
         }
 
@@ -139,6 +136,16 @@ class AddressController extends Controller
 
         return view('address.index', ['addresses' => $paginatedItems]);
         //return $conditions;
+    }
+
+    private function mapAddressResults($result)
+    {
+        $temp = [];
+        foreach ($result as $r) {
+            $address = Address::where('id', $r->id)->first();
+            $temp[$address->id] = $address;
+        }
+        return $temp;
     }
 
 }

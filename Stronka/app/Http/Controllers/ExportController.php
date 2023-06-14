@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ExportController extends Controller
 {
     public function exportAddresses() {
-        $data = DB::select('EXEC ExportData ?',['addresses']);
+        $data = DB::select('CALL ExportData( ?)',['addresses']);
 
         $data= collect($data);
 
@@ -22,7 +22,7 @@ class ExportController extends Controller
         $csvExporter->build($data, ['id', 'voivodeship', 'city', 'street', 'house_number','flat_number', 'postal_code','created_at', 'updated_at'])->download();
     }
     public function exportIllnesses() {
-        $data = DB::select('EXEC ExportData ?',['illnesses']);
+        $data = DB::select('CALL ExportData(?)',['illnesses']);
 
         $data= collect($data);
 
@@ -30,7 +30,7 @@ class ExportController extends Controller
         $csvExporter->build($data, ['id', 'name', 'description'])->download();
     }
     public function exportDoctors() {
-        $data = DB::select('EXEC ExportData ?',['doctors']);
+        $data = DB::select('CALL ExportData(?)',['doctors']);
 
         $data= collect($data);
 
@@ -38,7 +38,7 @@ class ExportController extends Controller
         $csvExporter->build($data, ['id','first_name','last_name','specialization','phone_number','ward_id','created_at', 'updated_at'])->download();
     }
     public function exportWards() {
-        $data = DB::select('EXEC ExportData ?',['wards']);
+        $data = DB::select('CALL ExportData(?)',['wards']);
 
         $data= collect($data);
 

@@ -29,3 +29,14 @@ END //
 
 DELIMITER ;
 
+create
+    definer = root@localhost procedure searchIllnesses(IN cond varchar(50), IN value varchar(200))
+BEGIN
+    CASE
+        WHEN cond = 'Nazwa' THEN
+            SELECT * FROM illnesses WHERE name = value;
+        WHEN cond = 'Opis' THEN
+            SELECT * FROM illnesses WHERE description LIKE value;
+        END CASE;
+END;
+

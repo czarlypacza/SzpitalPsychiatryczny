@@ -54,3 +54,21 @@ END //
 DELIMITER ;
 
 
+create
+    definer = root@localhost procedure searchAddresses(IN cond varchar(50), IN value varchar(50))
+BEGIN
+    IF cond = 'Województwo' THEN
+        SELECT * FROM addresses WHERE voivodeship = value;
+    ELSEIF cond = 'Miasto' THEN
+        SELECT * FROM addresses WHERE city = value;
+    ELSEIF cond = 'Ulica' THEN
+        SELECT * FROM addresses WHERE street = value;
+    ELSEIF cond = 'Nr domu' THEN
+        SELECT * FROM addresses WHERE house_number = value;
+    ELSEIF cond = 'Nr mieszkania' THEN
+        SELECT * FROM addresses WHERE flat_number = value;
+    ELSEIF cond = 'Kod pocztowy' THEN
+        SELECT * FROM addresses WHERE postal_code = value;
+    END IF;
+END;
+

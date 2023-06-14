@@ -15,8 +15,8 @@ return new class extends Migration
     {
         if(!Schema::hasTable('illness_patient')){
             Schema::create('illness_patient', function (Blueprint $table) {
-                $table->foreignIdFor(Patient::class)->constrained();
-                $table->foreignIdFor(Illness::class)->constrained();
+                $table->foreignIdFor(Patient::class)->constrained()->onDelete('cascade');;
+                $table->foreignIdFor(Illness::class)->constrained()->onDelete('cascade');
             });
         }
     }

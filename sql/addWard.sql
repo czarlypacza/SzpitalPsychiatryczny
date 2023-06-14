@@ -10,3 +10,13 @@ BEGIN
   INSERT INTO wards(ward_name) VALUES (name);
 END //
 DELIMITER ;
+
+
+
+
+create
+    definer = root@localhost procedure addWard(IN name varchar(50))
+BEGIN
+    INSERT INTO wards(ward_name) VALUES (name);
+END;
+

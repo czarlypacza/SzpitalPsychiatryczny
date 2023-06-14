@@ -22,3 +22,16 @@ BEGIN
 END //
 
 DELIMITER ;
+-- lokalna moja
+
+create
+    definer = root@localhost procedure addDoctor(IN first_name varchar(30), IN last_name varchar(40),
+                                                 IN specialization varchar(150), IN phone_number varchar(15),
+                                                 IN ward_name varchar(50))
+BEGIN
+    DECLARE WardID INT;
+    SELECT id INTO WardID FROM wards w WHERE w.ward_name = ward_name;
+
+    INSERT INTO doctors (first_name, last_name, specialization, phone_number, ward_id) VALUES (first_name, last_name, specialization, phone_number, WardID);
+END;
+

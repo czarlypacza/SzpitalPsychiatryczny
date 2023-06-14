@@ -26,3 +26,17 @@ END //
 
 DELIMITER ;
 
+
+
+create
+    definer = root@localhost procedure updateWard(IN w_ID int, IN NAME varchar(60))
+BEGIN
+    DECLARE count INT;
+    SELECT COUNT(id) INTO count FROM wards WHERE ward_name = NAME;
+    IF count = 0 THEN
+        UPDATE wards
+        SET ward_name = NAME
+        WHERE id = w_ID;
+    END IF;
+END;
+
