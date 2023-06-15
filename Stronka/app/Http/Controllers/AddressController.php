@@ -15,7 +15,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return view('address.index',['addresses'=>Address::paginate(15)]);
+        return view('address.index',['Addresses'=>Address::all(),'addresses'=>Address::paginate(15)]);
     }
 
     /**
@@ -134,7 +134,7 @@ class AddressController extends Controller
         $items = $addresses->slice(($currentPage - 1) * $perPage, $perPage)->values();
         $paginatedItems = new LengthAwarePaginator($items, $addresses->count(), $perPage, $currentPage, ['path' => Paginator::resolveCurrentPath()]);
 
-        return view('address.index', ['addresses' => $paginatedItems]);
+        return view('address.index', ['Addresses'=>$addresses,'addresses' => $paginatedItems]);
         //return $conditions;
     }
 

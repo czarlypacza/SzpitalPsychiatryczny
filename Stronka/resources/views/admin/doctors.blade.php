@@ -250,7 +250,11 @@
     <div class="d-flex justify-content-center mb-2">
         {{ $doctors->links() }}
     </div>
-    <form action="{{route('exportDoctors')}}" method="get" class="d-flex justify-content-center mb-2">
+    <form action="{{route('exportDoctors')}}" method="post" class="d-flex justify-content-center mb-2">
+        @csrf
+        @foreach($Doctors as $doctor)
+        <input name="{{$doctor->id}}" type="text" class="form-control" hidden value="{{$doctor->id}}">
+        @endforeach
         <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 

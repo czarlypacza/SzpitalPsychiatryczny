@@ -66,13 +66,13 @@ Route::post('/illness_patient',[Controller::class,'illness_patient'])->name('ins
 
 Route::delete('/illness_patient/{patient}/{illness}', [Controller::class, 'd_illness_patient'])->name('destroy_illness_patient');
 
-Route::get('/export/Addresses', [ExportController::class,'exportAddresses'])->name('exportAddresses');
+Route::post('/export/Addresses', [ExportController::class,'exportAddresses'])->name('exportAddresses');
 
-Route::get('/export/Illnesses', [ExportController::class,'exportIllnesses'])->name('exportIllnesses');
+Route::post('/export/Illnesses', [ExportController::class,'exportIllnesses'])->name('exportIllnesses');
 
-Route::get('/export/Doctors', [ExportController::class,'exportDoctors'])->name('exportDoctors');
+Route::post('/export/Doctors', [ExportController::class,'exportDoctors'])->name('exportDoctors');
 
-Route::get('/export/Wards', [ExportController::class,'exportWards'])->name('exportWards');
+Route::post('/export/Wards', [ExportController::class,'exportWards'])->name('exportWards');
 
 Route::post('/export/Patients', [ExportController::class,'exportPatients'])->name('exportPatients');
 

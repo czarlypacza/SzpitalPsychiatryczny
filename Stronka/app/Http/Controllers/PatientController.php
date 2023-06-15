@@ -309,6 +309,7 @@ class PatientController extends Controller
             // Push to results array
             $results[] = $temp;
         }
+
         if ($results == []) {
             return redirect()->route('patients.index')->with('error', 'Brak wynikÓw');
         }

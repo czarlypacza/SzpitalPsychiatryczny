@@ -147,7 +147,11 @@
     <div class="d-flex justify-content-center mb-2">
         {{ $illnesses->links() }}
     </div>
-    <form action="{{route('exportIllnesses')}}" method="get" class="d-flex justify-content-center mb-4">
+    <form action="{{route('exportIllnesses')}}" method="post" class="d-flex justify-content-center mb-4">
+        @csrf
+        @foreach($Illnesses as $illness)
+            <input name="{{$illness->id}}" type="text" class="form-control" hidden value="{{$illness->id}}">
+        @endforeach
         <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 

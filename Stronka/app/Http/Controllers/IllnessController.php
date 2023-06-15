@@ -18,6 +18,7 @@ class IllnessController extends Controller
     public function index()
     {
         return view('admin/illnesses', [
+            'Illnesses'=>Illness::all(),
             'illnesses'=>Illness::paginate(15)
         ]);
     }

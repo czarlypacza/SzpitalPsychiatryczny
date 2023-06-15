@@ -13,51 +13,90 @@ use Illuminate\Support\Facades\DB;
 
 class ExportController extends Controller
 {
-    public function exportAddresses() {
-        $data = DB::select('CALL ExportData( ?)',['addresses']);
+    public function exportAddresses(Request $request) {
+        $data = $request->all();
+        array_shift($data);
 
-        $data= collect($data);
+        $addresses = collect();
+        foreach ($data as $key => $value) {
+            $result = DB::select('CALL ExportData(?, ?)', ['addresses', $value]);
 
-        $csvExporter = new Export();
-        $csvExporter->build($data, ['id', 'voivodeship', 'city', 'street', 'house_number','flat_number', 'postal_code','created_at', 'updated_at'])->download();
-    }
-    public function exportIllnesses() {
-        $data = DB::select('CALL ExportData(?)',['illnesses']);
-
-        $data= collect($data);
-
-        $csvExporter = new Export();
-        $csvExporter->build($data, ['id', 'name', 'description'])->download();
-    }
-    public function exportDoctors() {
-        $data = DB::select('CALL ExportData(?)',['doctors']);
-
-        $data= collect($data);
+            $address = Address::where('id', $result[0]->id)->first();
+            $addresses->push($address);
+        }
 
         $csvExporter = new Export();
-        $csvExporter->build($data, ['id','first_name','last_name','specialization','phone_number','ward_id','created_at', 'updated_at'])->download();
+        $csvExporter->build($addresses, ['id', 'voivodeship', 'city', 'street', 'house_number', 'flat_number', 'postal_code', 'created_at', 'updated_at'])->download();
     }
-    public function exportWards() {
-        $data = DB::select('CALL ExportData(?)',['wards']);
 
-        $data= collect($data);
+    public function exportIllnesses(Request $request) {
+        $data = $request->all();
+        array_shift($data);
+
+        $illnesses = collect();
+        foreach ($data as $key => $value) {
+            $result = DB::select('CALL ExportData(?, ?)', ['illnesses', $value]);
+
+            $illness = Illness::where('id', $result[0]->id)->first();
+            $illnesses->push($illness);
+        }
 
         $csvExporter = new Export();
-        $csvExporter->build($data, ['id', 'ward_name'])->download();
+        $csvExporter->build($illnesses, ['id', 'name', 'description'])->download();
     }
+
+    public function exportDoctors(Request $request) {
+        $data = $request->all();
+        array_shift($data);
+
+        $doctors = collect();
+        foreach ($data as $key => $value) {
+            $result = DB::select('CALL ExportData(?, ?)', ['doctors', $value]);
+
+            $doctor = Doctor::where('id', $result[0]->id)->first();
+            $doctors->push($doctor);
+        }
+
+        $csvExporter = new Export();
+        $csvExporter->build($doctors, ['id', 'first_name', 'last_name', 'specialization', 'phone_number', 'ward_id', 'created_at', 'updated_at'])->download();
+    }
+
+    public function exportWards(Request $request) {
+        $data = $request->all();
+        array_shift($data);
+
+
+        $wards = collect();
+        foreach ($data as $key => $value) {
+            $result = DB::select('CALL ExportData(?, ?)', ['wards', $value]);
+
+            $ward = Ward::where('id', $result[0]->id)->first();
+            $wards->push($ward);
+        }
+
+        $csvExporter = new Export();
+        $csvExporter->build($wards, ['id', 'ward_name'])->download();
+    }
+
+
     public function exportPatients(Request $request) {
         $data = $request->all();
         array_shift($data);
-        $patients = [];
-        foreach ($data as $key => $value){
-            //$patients = Patient::where('id',$value)->get();
-            array_push($patients ,Patient::where('id',$value)->first());
+
+        $patients = collect();
+        foreach ($data as $key => $value) {
+            $result = DB::select('CALL ExportData(?,?)', ['patients', $value]);
+
+            // Create a new Patient model for each result
+            $patient = Patient::where('id', $result[0]->id)->first();
+            // Load the patient's doctor and address
+            $patient->load('doctor', 'address', 'illnesses');
+            // Add the patient to the collection
+            $patients->push($patient);
         }
-        //return $patients;
-        $patients= collect($patients);
 
         $csvExporter = new Export();
-        $csvExporter->build($patients, ['id','first_name','last_name','age','phone_number','pesel','weight','height','doctor_id','address_id','created_at', 'updated_at'])->download();
-
+        $csvExporter->build($patients, ['id','first_name','last_name','age','phone_number','pesel','weight','height','doctor_id','address_id'])->download();
     }
+
 }

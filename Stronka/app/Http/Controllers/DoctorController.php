@@ -19,6 +19,7 @@ class DoctorController extends Controller
     public function index()
     {
         return view('admin/doctors',[
+            'Doctors'=>Doctor::all(),
             'doctors'=>Doctor::paginate(15),
             'wards'=>Ward::all()
         ]);

@@ -525,7 +525,11 @@
             </div>
         </div>
 
-        <form action="{{route('exportWards')}}" method="get" class="d-flex justify-content-center mb-2">
+        <form action="{{route('exportWards')}}" method="post" class="d-flex justify-content-center mb-2">
+            @csrf
+            @foreach($wards as $ward)
+                <input name="{{$ward->id}}" type="text" class="form-control" hidden value="{{$ward->id}}">
+            @endforeach
             <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
         </form>
 

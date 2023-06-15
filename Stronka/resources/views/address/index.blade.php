@@ -286,7 +286,11 @@
     <div class="d-flex justify-content-center mb-2">
         {{ $addresses->links() }}
     </div>
-    <form action="{{route('exportAddresses')}}" method="get" class="d-flex justify-content-center">
+    <form action="{{route('exportAddresses')}}" method="post" class="d-flex justify-content-center">
+        @csrf
+        @foreach($Addresses as $address)
+            <input name="{{$address->id}}" type="text" class="form-control" hidden value="{{$address->id}}">
+        @endforeach
         <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 
