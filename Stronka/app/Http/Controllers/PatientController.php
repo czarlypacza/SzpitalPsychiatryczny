@@ -310,6 +310,31 @@ class PatientController extends Controller
             $results[] = $temp;
         }
 
+        if ($request->has('choroby')) {
+            $illnessIds = [];
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'illness') === 0 && $value) {
+                    $illnessIds[] = $value;
+                }
+            }
+
+            foreach ($illnessIds as $illnessId) {
+                $result = DB::select('call searchPatients (?,?)', ['Choroba', $illnessId]);
+                $temp = [];
+                foreach ($result as $r) {
+                    // Create a new Patient model for each result
+                    $patient = Patient::where('id', $r->id)->first();
+                    // Load the patient's doctor and address
+                    $patient->load('doctor', 'address');
+                    // Store each patient in the results array
+                    $temp[$patient->id] = $patient;
+                }
+                // Push to results array
+                $results[] = $temp;
+            }
+
+        }
+
         if ($results == []) {
             return redirect()->route('patients.index')->with('error', 'Brak wynikÓw');
         }

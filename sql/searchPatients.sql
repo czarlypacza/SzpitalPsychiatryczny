@@ -163,6 +163,10 @@ BEGIN
                                            FROM Patients p
                                                     INNER JOIN Addresses a ON p.address_id = a.id
                                            WHERE a.flat_number = value;
+        WHEN cond = 'Choroba' THEN SELECT p.*
+                                   FROM Patients p
+                                            INNER JOIN illness_patient i ON p.id = i.patient_id
+                                   WHERE i.illness_id = value;
         END CASE;
 END;
 

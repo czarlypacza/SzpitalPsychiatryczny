@@ -199,6 +199,36 @@
                                 <input type="text" class="form-control" name="flat_number" id="flat_number" >
                             </div>
                         </div>
+
+                        <div class="row align-items-center mt-2">
+                            <div class="col-1">
+                                <input class="form-check-input " type="checkbox" id="choroby" name="choroby" >
+                            </div>
+                            <div class="col-3">
+                                <label class="form-check-label" for="filter3">Choroby</label>
+                            </div>
+                            <div class="col-8">
+
+
+                                <ul class="list-group list-group-flush" id="illnessesFilter">
+                                    {{--<li class="list-group-item d-flex align-items-center justify-content-between">Albuterol Sulfate
+                                        <input hidden type="text" class="form-control" name="illness" id="illness" >
+                                        <button class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Czy na pewno usunąć wpis?')">Usuń</button>
+                                    </li>--}}
+                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                            <select id="illness_idFilter" class="form-select w-75" aria-label="Choroba">
+                                                @foreach($illnesses as $illness)
+                                                    <option value="{{ $illness->id }}">{{ $illness->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <a id="addillnessFilter" class="w-25 btn btn-sm btn-success">Dodaj</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
                         <div class="row inline-flex justify-content-evenly mt-3">
                         <button class="btn btn-outline-secondary mt-3" type="submit" id="button-addon2">
                             Filtruj
@@ -210,6 +240,25 @@
             </div>
         </div>
     </div>
+    <script>
+        function removeIllnessFilter(id,name){
+            if(confirm('Czy na pewno usunąć wpis?')){
+            console.log(id);
+            $("#illness_idFilter").append("<option value=\""+id+"\">"+name+"</option>");
+            $("#illnessFilter"+id).remove();
+            }
+        }
+
+        $(document).ready(function(){
+            $("#addillnessFilter").click(function(){
+                var illness_idFilter = $("#illness_idFilter").children("option:selected").val();
+                var illness_nameFilter = $("#illness_idFilter").children("option:selected").text();
+                $("#illnessesFilter").append("<li id=\"illnessFilter"+illness_idFilter+"\" class=\"list-group-item d-flex align-items-center justify-content-between\">"+illness_nameFilter+"<input hidden type=\"text\" class=\"form-control\" name=\"illness"+illness_idFilter+"\" id=\"illness"+illness_idFilter+"\" value=\""+illness_idFilter+"\" ><a class=\"btn btn-sm btn-danger\" onclick=\"removeIllnessFilter(" + illness_idFilter + ", '" + illness_nameFilter + "')\">Usuń</a></li>");
+                $("#illness_idFilter").children("option:selected").remove();
+            });
+        });
+
+    </script>
 
     <table class="table-striped table">
         <thead>
@@ -240,6 +289,8 @@
                     Info
                 </button></td>
             <td>
+
+
                 <button type="button" class="btn btn-outline-dark btn-sm ms-3 me-3"
                         data-bs-toggle="modal"
                         data-bs-target="#ModalPatient{{ $patient->id }}">
@@ -260,6 +311,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">{{$patient->first_name}} {{$patient->last_name}}</h5>
+
+
                                         <ul class="list-group list-group-flush">
                                             @foreach($patient->illnesses as $illness)
                                             <li class="list-group-item d-flex align-items-center justify-content-between">{{$illness->name}}
@@ -287,6 +340,8 @@
                                                     </form>
                                                 </li>
                                         </ul>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -301,6 +356,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </td>
             <td>
                 <button type="button" class="btn btn-sm btn-primary editDoctorBtn" data-bs-toggle="modal"
@@ -589,9 +646,9 @@
     <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 
-    <form action="{{ route('importPatients') }}" method="post" enctype="multipart/form-data" class="d-flex justify-content-center mb-2">
+    <form action="{{ route('importPatients') }}" method="post" enctype="multipart/form-data" class="d-flex align-items-center justify-content-center mb-2">
         @csrf
-        <input type="file" name="csv_file" class="form-control-file">
+        <input type="file" name="csv_file" class="w-50 grow-0 form-control">
         <button class="btn btn-sm btn-primary" type="submit">Import CSV</button>
     </form>
 </div>
