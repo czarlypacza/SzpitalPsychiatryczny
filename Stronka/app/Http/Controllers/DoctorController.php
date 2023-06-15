@@ -125,8 +125,8 @@ class DoctorController extends Controller
             $results[] = $temp;
         }
 
-        if ($request->has('oddzial') && $request->input('ward_name')) {
-            $result = DB::select('call searchDoctors (?,?)', ['Oddzial', $request->ward_name]);
+        if ($request->has('oddzial') && $request->input('ward_id')) {
+            $result = DB::select('call searchDoctors (?,?)', ['Oddzial', $request->ward_id]);
             $temp = $this->mapDoctorResults($result);
             $results[] = $temp;
         }

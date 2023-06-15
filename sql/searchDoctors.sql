@@ -67,10 +67,9 @@ BEGIN
         WHEN cond = 'Tel' THEN
             SELECT * FROM Doctors WHERE phone_number = value;
         WHEN cond = 'Oddzial' THEN
-            SELECT d.*
-            FROM Doctors d
-                     INNER JOIN wards w ON d.ward_id = w.id
-            WHERE w.ward_name = value;
+            SELECT * FROM Doctors WHERE ward_id = value;
+
+
         END CASE;
 END;
 

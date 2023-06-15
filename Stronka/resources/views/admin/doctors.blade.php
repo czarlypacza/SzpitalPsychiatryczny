@@ -81,7 +81,12 @@
                                     <label class="form-check-label" for="filter3">Oddział</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" name="ward_name" id="ward_name" >
+                                    {{--                                <input type="text" class="form-control" name="height" id="height" placeholder="Dummy Value 3">--}}
+                                    <select class="form-select" name="ward_id" id="ward_id">
+                                        @foreach($wards as $ward)
+                                            <option value="{{$ward->id}}">{{$ward->ward_name}} </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row inline-flex justify-content-evenly mt-3">
