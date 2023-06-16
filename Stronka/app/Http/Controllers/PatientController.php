@@ -57,7 +57,7 @@ class PatientController extends Controller
         DB::insert('call addPatient( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
 
-        return redirect()->route('patients.index');
+        return redirect()->back();
     }
 
     /**
@@ -103,7 +103,7 @@ class PatientController extends Controller
         DB::insert('call updatePatient (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[$patient->id,$request->first_name, $request->last_name, $request->age, $request->phone_number, $request->pesel, $request->weight, $request->height,$request->doctor_id, $request->voivodeship, $request->city, $request->street, $request->house_number, $request->flat_number, $request->postal_code]);
 
 
-        return redirect()->route('patients.index');
+        return redirect()->back();
     }
 
     /**
@@ -118,22 +118,23 @@ class PatientController extends Controller
     public function filterPatients(Request $request)
     {
         $results = [];
-
         if ($request->has('imie')) {
-            $result = DB::select('call searchPatients (?,?)', ['Imie', $request->first_name]);
-            $temp = [];
-            foreach ($result as $r) {
-                // Create a new Patient model for each result
-                $patient = Patient::where('id', $r->id)->first();
-                // Load the patient's doctor and address
-                $patient->load('doctor', 'address');
-                // Store each patient in the results array
-                $temp[$patient->id] = $patient;
+            $names = explode(',', $request->first_name);
+            foreach ($names as $name) {
+                $result = DB::select('call searchPatients (?,?)', ['Imie', trim($name)]);
+                $temp = [];
+                foreach ($result as $r) {
+                    // Create a new Patient model for each result
+                    $patient = Patient::where('id', $r->id)->first();
+                    // Load the patient's doctor and address
+                    $patient->load('doctor', 'address');
+                    // Store each patient in the results array
+                    $temp[$patient->id] = $patient;
+                }
+                // Push to results array
+                $results[] = $temp;
             }
-            // Push to results array
-            $results[] = $temp;
         }
-
         if ($request->has('nazwisko')) {
             $result = DB::select('call searchPatients (?,?)', ['Nazwisko', $request->last_name]);
             $temp = [];
@@ -148,6 +149,7 @@ class PatientController extends Controller
             // Push to results array
             $results[] = $temp;
         }
+
         if ($request->has('telefon')) {
             $result = DB::select('call searchPatients (?,?)', ['Tel', $request->phone_number]);
             $temp = [];

@@ -155,9 +155,9 @@
         <button class="btn btn-sm btn-warning" type="submit">Export to CSV</button>
     </form>
 
-    <form action="{{ route('importIllnesses') }}" method="post" enctype="multipart/form-data" class="d-flex justify-content-center mb-2">
+    <form action="{{ route('importIllnesses') }}" method="post" enctype="multipart/form-data" class="d-flex align-items-center justify-content-center mb-2">
         @csrf
-        <input type="file" name="csv_file" class="form-control-file">
+        <input type="file" name="csv_file" class="w-50 grow-0 form-control">
         <button class="btn btn-sm btn-primary" type="submit">Import CSV</button>
     </form>
 </div>
